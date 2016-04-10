@@ -1,0 +1,2 @@
+class AllegiancesController < ApplicationController
+end

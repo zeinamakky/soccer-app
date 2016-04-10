@@ -1,0 +1,13 @@
+<h1>All pubs</h1>
+
+<% @pubs.each do |pub| %>
+  <h2><%= link_to pub.name, "/pubs/#{pub.id}" %></h2>
+  <p><%= pub.address1 %></p>
+  <p><%= pub.city %>, <%= pub.state %> <%= pub.zip %></p>
+  <p><%= pub.phone %> | <%= pub.email %> | <%= pub.website %></p>
+  <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
+    <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %>
+  <% else %>
+  <% end %>
+  <hr>
+<% end %>

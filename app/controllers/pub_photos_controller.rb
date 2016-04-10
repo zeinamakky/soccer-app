@@ -1,0 +1,2 @@
+class PubPhotosController < ApplicationController
+end

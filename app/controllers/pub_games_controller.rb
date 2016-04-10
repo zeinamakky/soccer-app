@@ -1,0 +1,2 @@
+class PubGamesController < ApplicationController
+end

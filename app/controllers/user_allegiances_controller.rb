@@ -1,0 +1,2 @@
+class UserAllegiancesController < ApplicationController
+end

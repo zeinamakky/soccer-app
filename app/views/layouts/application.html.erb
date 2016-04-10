@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SoccerApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if current_pub_user == nil && current_user_login == nil %>
+  PUB OWNERS: <a href="/pub_users/sign_up">Sign up</a> or
+  <a href="/pub_users/sign_in">Sign in</a>
+  <% elsif current_pub_user %>
+  <%= link_to "Sign out  |", "/pub_users/sign_out", method: :delete %>
+<% end %>
+<a href="/pubs">All Pubs</a> | 
+<% if current_pub_user %>
+  <a href="/pubs?owner=mypubs">Your pubs</a> | 
+  <a href="/pubs/new">Add a Pub</a> |
+<% end %>
+<% if current_user_login == nil && current_pub_user == nil %>
+  FANS: <a href="/user_logins/sign_up">Sign up</a> or
+  <a href="/user_logins/sign_in">Sign in</a>
+  <% elsif current_user_login %>
+  <%= link_to "Sign out  |", "/user_logins/sign_out", method: :delete %>
+<% end %>
+  <a href="/users/new">Create your profile</a> |
+
+<%= yield %>
+
+</body>
+</html>
