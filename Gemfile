@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'unirest', '~> 1.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

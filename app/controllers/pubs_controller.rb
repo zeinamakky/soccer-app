@@ -7,6 +7,11 @@ class PubsController < ApplicationController
     if current_pub_user && owner_pubs
     @pubs = Pub.where(pub_user_id: current_pub_user.id) 
     end
+
+    search_for = params[:search].downcase if params[:search]
+    if search_for
+      @pubs = Pub.where("lower(name) LIKE ? OR lower(address1) LIKE ? OR lower(city) LIKE ?", "%#{search_for}%", "%#{search_for}%", "%#{search_for}%")
+    end
   end
 
   def show
@@ -60,8 +65,8 @@ class PubsController < ApplicationController
       phone: params[:phone],
       fax: params[:fax],
       email: params[:email],
-      website: params[:website],
+      website: params[:website]
     )
-    redirect_to "/pubs/#{@pub.id}"
+    redirect_to "/pubs?owner=mypubs"
   end
 end

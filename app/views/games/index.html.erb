@@ -1,0 +1,20 @@
+<h1>Soccer games</h1>
+<a href="premier">Premier League</a> | 
+<a href="ligue1">Ligue 1</a> | 
+<h2>Premier League</h2>
+<% @premier_fixtures.each do |premier_match| %>
+  <p><b>Date:</b> <%= premier_match["date"] %></p>
+  <p><%= premier_match["homeTeamName"] %> VS <%= premier_match["awayTeamName"] %></p>
+  <p>Result: <%= premier_match["result"]["goalsHomeTeam"] %> - <%= premier_match["result"]["goalsAwayTeam"] %></p>
+
+
+  <hr>
+<%end %>
+
+<h2>Ligue1</h2>
+<% @ligue1_fixtures.each do |ligue1_match| %>
+  <p><b>Date:</b> <%= ligue1_match["date"] %></p>
+  <p><%= ligue1_match["homeTeamName"] %> VS <%= ligue1_match["awayTeamName"] %></p>
+  <p>Result: <%= ligue1_match["result"]["goalsHomeTeam"] %> - <%= ligue1_match["result"]["goalsAwayTeam"] %></p>
+  <hr>
+<%end %>
