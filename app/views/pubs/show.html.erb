@@ -1,11 +1,34 @@
+<img src="<%= @photos[0].photo_url %>" width="800px">
 <h2><%= @pub.name %></h2>
 <p><%= @pub.address1 %></p>
 <p><%= @pub.city %>, <%= @pub.state %> <%= @pub.zip %></p>
 <p><%= @pub.phone %> | <%= @pub.email %> | <%= @pub.website %></p>
-<% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
-    <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %>
-
-  <% else %>
+<p><iframe src="<%= @pub.map %>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+<% if current_pub_user && current_pub_user.id == @pub.pub_user_id %>
+  <%= link_to "Edit this pub", "/pubs/#{@pub.id}/edit" %>
+  <a href="/games">Add games</a>
+<% elsif current_user_login %>
+  <h3>Add a review</h3>
+  <%= form_tag "/reviews", class: "form-horizontal", method: :post do %>
+    <%= hidden_field_tag :pub_id, @pub.id %>
+    <p><%= label_tag :author, "Name" %>: <%= text_field_tag :author, current_user_login.user.first_name %></p>
+    <p><%= label_tag :review_text, "Review" %></p>
+    <p><%= text_area_tag :review_text, "" %></p>
+    <p><%= submit_tag "Submit" %></p>
   <% end %>
-<hr>
+
+<% end %>
+<h3>Reviews</h3>
+<% @reviews.each do |review| %>
+  <p><b><%= review.review_text%></b></p>
+  <p>By <%= review.author %></p>
+<% end %>
+<h3>Games showing</h3>
+<% @games.each do |game| %>
+  <% if game.date >= Date.current %>
+    <h4><%= game.home_team %> VS <%= game.away_team %></h4>
+    <p><%= game.date.strftime("%A, %b %d, %Y") %> at <%= game.time.strftime("%I:%M:%S %p") %></p>
+    <hr>
+  <%end%>
+<%end%>
 

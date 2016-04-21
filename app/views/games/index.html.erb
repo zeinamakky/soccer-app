@@ -3,10 +3,25 @@
 <a href="ligue1">Ligue 1</a> | 
 <h2>Premier League</h2>
 <% @premier_fixtures.each do |premier_match| %>
-  <p><b>Date:</b> <%= premier_match["date"] %></p>
-  <p><%= premier_match["homeTeamName"] %> VS <%= premier_match["awayTeamName"] %></p>
-  <p>Result: <%= premier_match["result"]["goalsHomeTeam"] %> - <%= premier_match["result"]["goalsAwayTeam"] %></p>
-
+  <% datetime = DateTime.parse(premier_match["date"]) %>
+  <h3><%= premier_match["homeTeamName"] %> VS <%= premier_match["awayTeamName"] %></h3></a>
+  <p><b>Date:</b> <%= datetime.strftime("%A, %b %d, %Y") %> at <%= datetime.strftime("%I:%M:%S %p") %></p>
+  
+  <p class="game_result">Show Result: <%= premier_match["result"]["goalsHomeTeam"] %> - <%= premier_match["result"]["goalsAwayTeam"] %></p>
+  <% if current_pub_user %>
+    <%= form_tag '/pub_games', class: "form-horizontal", method: :post do %>
+      <%= hidden_field_tag :home_team, premier_match["homeTeamName"] %>
+      <%= hidden_field_tag :away_team, premier_match["awayTeamName"] %>
+      <%= hidden_field_tag :date, datetime.strftime("%A, %b %d, %Y") %>
+      <%= hidden_field_tag :time, datetime.strftime("%I:%M:%S %p") %>
+      
+      <%= hidden_field_tag :league, "Premier League" %>
+      
+      <%= collection_select :pub, :pub_id, @pubs, :id, :name %>
+    
+      <%= submit_tag "Add Game" %>
+    <%end%>
+  <%end%>
 
   <hr>
 <%end %>

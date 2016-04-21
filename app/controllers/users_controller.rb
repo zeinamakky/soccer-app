@@ -12,6 +12,7 @@ class UsersController < ApplicationController
       twitter_username: params[:twitter_username],
       fb_username: params[:fb_username],
       avatar: params[:avatar],
+      email: current_user_login.email,
       user_login_id: current_user_login.id
     )
     @user.save
@@ -21,5 +22,24 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     render 'show.html.erb'
+  end
+
+  def edit
+    @user = User.find_by(id: params[:id])
+  end
+
+  def update
+    @user = User
+    .find_by(id: params[:id])
+    .update(
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      twitter_username: params[:twitter_username],
+      fb_username: params[:fb_username],
+      avatar: params[:avatar],
+      user_login_id: current_user_login.id,
+      email: current_user_login.email
+    )
+    redirect_to "/users/#{params[:id]}"
   end
 end

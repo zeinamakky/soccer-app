@@ -24,15 +24,20 @@
   <a href="/user_logins/sign_in">Sign in</a>
   <% elsif current_user_login %>
   <%= link_to "Sign out  |", "/user_logins/sign_out", method: :delete %>
+    <% if current_user_login.user == nil %>
+      <a href="/users/new">Create your profile</a> |
+    <% else %>
+      <%= link_to "Edit your profile", "/users/#{current_user_login.id}" %>
+    <%end%>
 <% end %>
-  <a href="/users/new">Create your profile</a> |
 
 <%= form_tag "/pubs", class:"navbar-form navbar-left", method: :get do %>
 <p>Search by location: <%= text_field_tag :search, nil, class:"form-control" %>
   <%= submit_tag "Submit", class: "btn btn-default" %></p>
 <% end %>
-<%= form_tag "/pubs", class:"navbar-form navbar-left", method: :get do %>
-<p>Search by day: <%= text_field_tag :search, nil, class:"form-control" %>
+<%= form_tag "/games", class:"navbar-form navbar-left", method: :get do %>
+<p>Search by day: 
+<%= select_date Date.today, prefix: :start_date %>
   <%= submit_tag "Submit", class: "btn btn-default" %></p>
 <% end %>
 <%= yield %>

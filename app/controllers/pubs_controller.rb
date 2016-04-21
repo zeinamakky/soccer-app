@@ -12,10 +12,14 @@ class PubsController < ApplicationController
     if search_for
       @pubs = Pub.where("lower(name) LIKE ? OR lower(address1) LIKE ? OR lower(city) LIKE ?", "%#{search_for}%", "%#{search_for}%", "%#{search_for}%")
     end
+    
   end
 
   def show
+    @reviews = Review.all
     @pub = Pub.find_by(id: params[:id])
+    @photos = PubPhoto.where(pub_id: params[:id])
+    @games = PubGame.where(pub_id: params[:id])
     render 'show.html.erb'
   end
 
@@ -35,6 +39,7 @@ class PubsController < ApplicationController
       fax: params[:fax],
       email: params[:email],
       website: params[:website],
+      map: params[:map],
       pub_user_id: current_pub_user.id
     )
     @pub.save
@@ -65,6 +70,7 @@ class PubsController < ApplicationController
       phone: params[:phone],
       fax: params[:fax],
       email: params[:email],
+      map: params[:map],
       website: params[:website]
     )
     redirect_to "/pubs?owner=mypubs"

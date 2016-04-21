@@ -1,29 +1,28 @@
-<h1>Create your profile</h1>
+<h1>Edit</h1>
 
 <% if current_user_login %>
-<%= form_tag '/users', class: "form-horizontal", method: :post do %>
+<%= form_tag "/users/#{@user.id}", class: "form-horizontal", method: :patch do %>
   <div class="form-group">
     <%=label_tag :first_name, "First name", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :first_name, " ", class: "col-sm-10" %>
+    <%= text_field_tag :first_name, @user.first_name, class: "col-sm-10" %>
   </div>
 
   <div class="form-group">
     <%=label_tag :last_name, "Last Name", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :last_name, " ", class: "col-sm-10" %>
-    <%= hidden_field_tag :email, current_user_login.email %>
+    <%= text_field_tag :last_name, @user.last_name, class: "col-sm-10" %>
   </div>
   
   <div class="form-group">
     <%=label_tag :twitter_username, "Twitter username", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :twitter_username, " ", class: "col-sm-10" %>
+    <%= text_field_tag :twitter_username, @user.twitter_username, class: "col-sm-10" %>
   </div>
   <div class="form-group">
     <%=label_tag :fb_username, "Facebook", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :fb_username, " ", class: "col-sm-10" %>
+    <%= text_field_tag :fb_username, @user.fb_username, class: "col-sm-10" %>
   </div>
   <div class="form-group">
     <%=label_tag :avatar, "Picture", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :avatar, " ", class: "col-sm-10" %>
+    <%= text_field_tag :avatar, @user.avatar, class: "col-sm-10" %>
   </div>
   
   <div class="form-group">

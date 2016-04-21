@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413235303) do
+ActiveRecord::Schema.define(version: 20160420234450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,17 @@ ActiveRecord::Schema.define(version: 20160413235303) do
 
   create_table "pub_games", force: :cascade do |t|
     t.integer  "pub_id"
-    t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.date     "date"
+    t.time     "time"
+    t.string   "channel"
+    t.string   "location"
+    t.string   "league"
+    t.integer  "away_team_icon_id"
+    t.integer  "home_team_icon_id"
+    t.string   "home_team"
+    t.string   "away_team"
   end
 
   create_table "pub_photos", force: :cascade do |t|
@@ -80,6 +88,15 @@ ActiveRecord::Schema.define(version: 20160413235303) do
     t.datetime "updated_at",  null: false
     t.string   "name"
     t.integer  "pub_user_id"
+    t.string   "map"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "pub_id"
+    t.string   "author"
+    t.text     "review_text"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "teams", force: :cascade do |t|
