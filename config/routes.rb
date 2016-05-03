@@ -19,10 +19,17 @@ Rails.application.routes.draw do
   get '/games' => 'games#index'
   get '/games/:id' => 'games#show'
 
+  get '/pub_games' => 'pub_games#index'
   post '/pub_games' => 'pub_games#create'
 
   post '/reviews' => 'reviews#create'
 
+  namespace :api do 
+    namespace :v1 do
+      get '/pubs' => 'pubs#index'
+      get '/games' => 'games#index'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,38 @@
+<div ng-app="app">
+  <div ng-controller="pubGamesCtrl" ng-init="setup()">
+
+    <h2>Filter by team: <input ng-model="teamFilter" list="teams"></h2>
+    <h2>Filter by league: <input ng-model="leagueFilter" list="leagues"></h2>
+    <h2>Filter by pub: <input ng-model="pubFilter" list="pubs"></h2>
+    <h2>Filter by date: <input ng-model="dateFilter" list="dates"></h2>
+    
+    <datalist id="teams">
+      <option ng-repeat="match in ligue1Matches">{{match.team}}</option>
+    </datalist>
+
+    <datalist id="leagues">
+      <option ng-repeat="match in ligue1Matches">{{match.league}}</option>
+    </datalist>
+
+    <datalist id="pubs">
+      <option ng-repeat="match in ligue1Matches">{{match.pub}}</option>
+    </datalist>
+    <datalist id="dates">
+      <option ng-repeat="match in ligue1Matches">{{match.date}}</option>
+    </datalist>
+
+    <div class="match" ng-repeat="match in ligue1Matches">
+    </div>
+
+
+<% @pub_games.each do |game| %>
+  <h3><%= game.home_team %> VS <%= game.away_team %></h3></a>
+  <p><b>Date:</b> <%= game.date.strftime("%A, %b %d, %Y") %> at <%= game.time.strftime("%I:%M:%S %p") %></p>
+  
+  <h3>Showing at the following pubs:</h3>
+  <% @pubs.where(id: game.pub_id).each do |pub|%>
+    <%= pub.name %>, <%= pub.city %>
+  <%end%>
+
+  <hr>
+<%end %>

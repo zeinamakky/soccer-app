@@ -1,6 +1,47 @@
+<div ng-app="app">
+  <div ng-controller="gamesCtrl" ng-init="setup()">
+    <div>
+      <h2>Filter by team: <input ng-model="teamFilter"></h2>
+      <h2>Filter by date: <input ng-model="dateFilter"></h2>
+      
+      <datalist id="teams">
+        <option ng-repeat="match in matches">{{match.awayTeamName}}</option>
+        <option ng-repeat="match in matches">{{match.homeTeamName}}</option>
+
+      </datalist>
+
+      <datalist id="pubs">
+        <option ng-repeat="match in matches">{{match.pub}}</option>
+      </datalist>
+    <!--   <datalist id="dates">
+        <option ng-repeat="match in matches">{{match.date}}</option>
+      </datalist> -->
+      <h1>Premier League</h1>
+      <div class="match" ng-repeat="match in matches | filter: {league:'Premier League'} | filter:teamFilter | filter:dateFilter">
+        <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+        <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+        <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+        <hr>
+      </div>
+
+      <h1>Ligue1</h1>
+      <div class="match" ng-repeat="match in matches | filter: {league:'Ligue 1'} | filter:teamFilter">
+        <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+        <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+        <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+        <hr>
+      </div>
+
+    </div>
+  
+  </div>
+</div>
+
+
+  <% if current_pub_user %>
+
+<h1><%= @game_day %></h1>
 <h1>Soccer games</h1>
-<a href="premier">Premier League</a> | 
-<a href="ligue1">Ligue 1</a> | 
 <h2>Premier League</h2>
 <% @premier_fixtures.each do |premier_match| %>
   <% datetime = DateTime.parse(premier_match["date"]) %>
@@ -8,7 +49,6 @@
   <p><b>Date:</b> <%= datetime.strftime("%A, %b %d, %Y") %> at <%= datetime.strftime("%I:%M:%S %p") %></p>
   
   <p class="game_result">Show Result: <%= premier_match["result"]["goalsHomeTeam"] %> - <%= premier_match["result"]["goalsAwayTeam"] %></p>
-  <% if current_pub_user %>
     <%= form_tag '/pub_games', class: "form-horizontal", method: :post do %>
       <%= hidden_field_tag :home_team, premier_match["homeTeamName"] %>
       <%= hidden_field_tag :away_team, premier_match["awayTeamName"] %>
@@ -21,7 +61,7 @@
     
       <%= submit_tag "Add Game" %>
     <%end%>
-  <%end%>
+ 
 
   <hr>
 <%end %>
@@ -33,3 +73,4 @@
   <p>Result: <%= ligue1_match["result"]["goalsHomeTeam"] %> - <%= ligue1_match["result"]["goalsAwayTeam"] %></p>
   <hr>
 <%end %>
+ <%end%>

@@ -7,6 +7,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1589463038032749',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
   <% if current_pub_user == nil && current_user_login == nil %>
   PUB OWNERS: <a href="/pub_users/sign_up">Sign up</a> or
   <a href="/pub_users/sign_in">Sign in</a>
@@ -35,7 +53,7 @@
 <p>Search by location: <%= text_field_tag :search, nil, class:"form-control" %>
   <%= submit_tag "Submit", class: "btn btn-default" %></p>
 <% end %>
-<%= form_tag "/games", class:"navbar-form navbar-left", method: :get do %>
+<%= form_tag "/pub_games", class:"navbar-form navbar-left", method: :get do %>
 <p>Search by day: 
 <%= select_date Date.today, prefix: :start_date %>
   <%= submit_tag "Submit", class: "btn btn-default" %></p>
