@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   post '/reviews' => 'reviews#create'
 
+
   namespace :api do 
     namespace :v1 do
       get '/pubs' => 'pubs#index'
