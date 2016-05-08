@@ -1,8 +1,11 @@
-<div ng-app="app">
+<div class="container">
+
+  <h1>Upcoming Games</h1>
+ 
+  <div ng-app="app">
   <div ng-controller="gamesCtrl" ng-init="setup()">
     <div>
-      <h2>Filter by team: <input ng-model="teamFilter"></h2>
-      <h2>Filter by date: <input ng-model="dateFilter"></h2>
+      <h5>Filter by team: <input ng-model="teamFilter"> Filter by date: <input ng-model="dateFilter"></h5>
       
       <datalist id="teams">
         <option ng-repeat="match in matches">{{match.awayTeamName}}</option>
@@ -16,61 +19,176 @@
     <!--   <datalist id="dates">
         <option ng-repeat="match in matches">{{match.date}}</option>
       </datalist> -->
-      <h1>Premier League</h1>
-      <div class="match" ng-repeat="match in matches | filter: {league:'Premier League'} | filter:teamFilter | filter:dateFilter">
-        <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-        <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
-        <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
-        <hr>
-      </div>
 
-      <h1>Ligue1</h1>
-      <div class="match" ng-repeat="match in matches | filter: {league:'Ligue 1'} | filter:teamFilter">
-        <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-        <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
-        <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
-        <hr>
+  <!-- Accordion starts -->
+  <hr />
+  <div class="panel-group" id="accordion">
+   <!-- Panel. Use "panel-XXX" class for different colors. Replace "XXX" with color. -->
+    <div class="panel panel-default"> 
+    <!-- Panel heading -->
+     <div class="panel-heading">
+      <h2 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+         Champions League if there are none??
+        </a>
+      </h2>
+     </div>
+     <div id="collapseOne" class="panel-collapse collapse in">
+      <!-- Panel body -->
+      <div class="panel-body">
+        <div class="match" ng-repeat="match in matches |filter: {league:'Champions League'} | filter:teamFilter | filter:dateFilter">
+         <div ng-if='match.date > today'>
+          <h2>{{match.date}}
+          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+          <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <hr>
+          </div>
+        </div>
       </div>
-
+     </div>
     </div>
-  
+
+
+    <div class="panel panel-default"> 
+    <!-- Panel heading -->
+     <div class="panel-heading">
+      <h2 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+         Premier League
+        </a>
+      </h2>
+     </div>
+     <div id="collapseOne" class="panel-collapse collapse in">
+      <!-- Panel body -->
+      <div class="panel-body">
+        <div class="match" ng-repeat="match in matches |filter: {league:'Premier League'} | filter:teamFilter | filter:dateFilter">
+         <div ng-if='match.date > today'>
+          <h2>{{match.date}}
+          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+          <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <% if current_pub_user %>
+            <%= form_tag '/pub_games', class: "form-horizontal", method: :post do %>
+              <%= hidden_field_tag :home_team, "{{match.homeTeamName}}" %>
+              <%= hidden_field_tag :away_team, "{{match.awayTeamName}}" %>
+              <%= hidden_field_tag :date, "{{match.date| date:'EEEE, MMMM d, y'}}" %>
+              <%= hidden_field_tag :time, "{{match.date | date:'h:mma'}}" %>
+              
+              <%= hidden_field_tag :league, "{{match.league}}" %>
+              
+              <%= collection_select :pub, :pub_id, @pubs, :id, :name %>
+            
+              <%= submit_tag "Add Game" %>
+            <%end%>
+          <%end%>
+          <hr>
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    <div class="panel panel-default">
+     <div class="panel-heading">
+      <h2 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+         Ligue 1
+        </a>
+      </h2>
+     </div>
+     <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        <div class="match" ng-repeat="match in matches | filter: {league:'Ligue 1'} | filter:teamFilter">
+          <div ng-if='match.date > today'>
+          <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+          <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <hr>
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    <div class="panel panel-default">
+     <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+         Bundesliga
+        </a>
+      </h4>
+     </div>
+     <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        <div class="match" ng-repeat="match in matches |filter: {league:'Bundesliga'} | filter:teamFilter | filter:dateFilter">
+         <div ng-if='match.date > today'>
+          <h2>{{match.date}}
+          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+          <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <hr>
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+         Serie A
+        </a>
+      </h4>
+     </div>
+    <div id="collapseFour" class="panel-collapse collapse">
+      <div class="panel-body">
+        <div class="match" ng-repeat="match in matches |filter: {league:'Serie A'} | filter:teamFilter | filter:dateFilter">
+         <div ng-if='match.date > today'>
+          <h2>{{match.date}}
+          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+          <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <hr>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+     <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+         Eredivisie
+        </a>
+      </h4>
+     </div>
+     <div id="collapseFive" class="panel-collapse collapse">
+      <div class="panel-body">
+        <div class="match" ng-repeat="match in matches |filter: {league:'Eredivisie'} | filter:teamFilter | filter:dateFilter">
+         <div ng-if='match.date > today'>
+          <h2>{{match.date}}
+          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+          <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <hr>
+          </div>
+        </div>
+      </div>
+     </div>
+     </div>
+    </div>
+    </div>
   </div>
+<!-- Accordion ends -->
 </div>
-
-
-  <% if current_pub_user %>
-
-<h1><%= @game_day %></h1>
-<h1>Soccer games</h1>
-<h2>Premier League</h2>
-<% @premier_fixtures.each do |premier_match| %>
-  <% datetime = DateTime.parse(premier_match["date"]) %>
-  <h3><%= premier_match["homeTeamName"] %> VS <%= premier_match["awayTeamName"] %></h3></a>
-  <p><b>Date:</b> <%= datetime.strftime("%A, %b %d, %Y") %> at <%= datetime.strftime("%I:%M:%S %p") %></p>
+</div>
   
-  <p class="game_result">Show Result: <%= premier_match["result"]["goalsHomeTeam"] %> - <%= premier_match["result"]["goalsAwayTeam"] %></p>
-    <%= form_tag '/pub_games', class: "form-horizontal", method: :post do %>
-      <%= hidden_field_tag :home_team, premier_match["homeTeamName"] %>
-      <%= hidden_field_tag :away_team, premier_match["awayTeamName"] %>
-      <%= hidden_field_tag :date, datetime.strftime("%A, %b %d, %Y") %>
-      <%= hidden_field_tag :time, datetime.strftime("%I:%M:%S %p") %>
-      
-      <%= hidden_field_tag :league, "Premier League" %>
-      
-      <%= collection_select :pub, :pub_id, @pubs, :id, :name %>
-    
-      <%= submit_tag "Add Game" %>
-    <%end%>
- 
 
-  <hr>
-<%end %>
 
-<h2>Ligue1</h2>
-<% @ligue1_fixtures.each do |ligue1_match| %>
-  <p><b>Date:</b> <%= ligue1_match["date"] %></p>
-  <p><%= ligue1_match["homeTeamName"] %> VS <%= ligue1_match["awayTeamName"] %></p>
-  <p>Result: <%= ligue1_match["result"]["goalsHomeTeam"] %> - <%= ligue1_match["result"]["goalsAwayTeam"] %></p>
-  <hr>
-<%end %>
- <%end%>
+
+      
+
+      
+
+  
+
+
