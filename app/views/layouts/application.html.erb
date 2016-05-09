@@ -113,22 +113,27 @@
               <div class="navy">      
                 <ul>
                 <!-- Main menu -->
-                  <li><a href="#">PUB OWNERS</a>
-                    <ul>
-                      <% if current_pub_user == nil && current_user_login == nil %>
+                  <% if current_pub_user == nil && current_user_login == nil %>
+
+                    <li><a href="#">PUB OWNERS</a>
+                      <ul>
                         <li><a href="/pub_users/sign_up">Sign up</a> </li>
                         <li><a href="/pub_users/sign_in">Sign in</a></li>
-                      <% elsif current_pub_user %>
+                      </ul>
+                    </li>
+
+                  <% elsif current_pub_user %>
+                    <li><a href="#">PUB OWNERS</a>
+                      <ul>
                         <li>
                         <%= link_to "Sign out", "/pub_users/sign_out", method: :delete %>
                         </li>
-                      <% end %>
-                      <% if current_pub_user %>
+                      
                         <li><a href="/pubs?owner=mypubs">Your pubs</a></li>                
                         <li><a href="/pubs/new">Add a Pub</a></li>
-                      <% end %>
+                      
                     </ul>
-                  </li>
+                  </li><% end %>
                 
                   
                   <% if current_user_login == nil && current_pub_user == nil %>
