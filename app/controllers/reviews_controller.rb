@@ -4,7 +4,9 @@ class ReviewsController < ApplicationController
     @review = Review.new(
       pub_id: params[:pub_id],
       author: params[:author],
+      user_id: params[:user_id],
       review_text: params[:review_text]
+
     )
     @review.save
     redirect_to "/pubs/#{@pub.id}"

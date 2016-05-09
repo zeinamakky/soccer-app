@@ -116,10 +116,8 @@
                   <li><a href="#">PUB OWNERS</a>
                     <ul>
                       <% if current_pub_user == nil && current_user_login == nil %>
-                        <li>
-                        <a href="/pub_users/sign_up">Sign up</a> 
-                        <a href="/pub_users/sign_in">Sign in</a>
-                        </li>
+                        <li><a href="/pub_users/sign_up">Sign up</a> </li>
+                        <li><a href="/pub_users/sign_in">Sign in</a></li>
                       <% elsif current_pub_user %>
                         <li>
                         <%= link_to "Sign out", "/pub_users/sign_out", method: :delete %>
@@ -154,7 +152,7 @@
                   </li>
                   <%end%>
                   
-                  
+
                   <li><a href="/pubs">All Pubs</a></li>
                   
                   <li><a href="/games">All Games</a></li>
@@ -188,16 +186,6 @@
       <!-- Main content starts -->
   
       <div class="main-block">
-        
-        <!-- Page heading one starts -->
-        
-        <div class="page-heading-one">
-          <h2>Heading</h2>
-          <p class="bg-color">Our Works Here</p>
-        </div>
-          
-        <!-- Page heading one ends -->
-      
         <div class="container">
         <script>
           window.fbAsyncInit = function() {
