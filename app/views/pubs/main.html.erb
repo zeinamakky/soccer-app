@@ -1,0 +1,34 @@
+<div class="page-heading-one">
+  <h2>Soccer Watch</h2>
+  <p class="bg-color">"Football is an art, like dancing is an art - 
+  but only when it's well done does it become an art. </p>
+  <br /> <p class="bg-color" style="text-align: right">- Arsene Wenger</p>
+</div>
+        
+      
+<div class="main-block">
+ 
+ <br />
+        
+<div class="block-heading-four">
+<div class="text-center" style="margin:0, auto">
+<%= form_tag "/pubs", class:"navbar-form", method: :get do %>
+  Search by location: <%= text_field_tag :search, nil, class:"form-control" %>
+  <%= submit_tag "Submit", class: "btn btn-default" %>
+<% end %>
+  <%= form_tag "/pub_games", class:"navbar-form", method: :get do %>
+  Search by day: 
+  <%= select_date Date.today, prefix: :start_date %>
+  <%= submit_tag "Submit", class: "btn btn-default" %>
+<% end %>
+<div class="clearfix"></div>
+
+</div>
+
+<br />
+<br />
+<br />
+<br />
+</div>
+
+        

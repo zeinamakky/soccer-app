@@ -15,6 +15,10 @@ class PubsController < ApplicationController
     
   end
 
+  def main
+    render 'main.html.erb'
+  end
+
   def show
     @reviews = Review.all
     @pub = Pub.find_by(id: params[:id])

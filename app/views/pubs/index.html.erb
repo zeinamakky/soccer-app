@@ -1,22 +1,55 @@
-<div ng-app="app"><timer autostart="false" countdown="90061">{{days}} day{{daysS}}, {{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer>
-</div>
-<h1>Map</h1>
-<div id="map"></div>
+<div ng-app="app">
 
- <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+  <div id="map"></div>
 
-<h1>All pubs</h1>
+  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    <div class="container">
+        
+      <div class="block-heading-two">
+        <h3><span>All Pubs</span></h3>
+      </div>
 
-<% @pubs.each do |pub| %>
-  <h2><%= link_to pub.name, "/pubs/#{pub.id}" %></h2>
-  <p><%= pub.address1 %></p>
-  <p><%= pub.city %>, <%= pub.state %> <%= pub.zip %></p>
-  <p><%= pub.phone %> | <%= pub.email %> | <%= pub.website %></p>
-  
-  <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
-    <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %> |
-    <a href="/games">Add games</a>
-  <% else %>
-  <% end %>
-  <hr>
-<% end %>
+      <!-- Team #2 -->
+      <div class="team-two">
+        <div class="row">
+          <% @pubs.each do |pub| %>
+
+        
+          <div class="col-md-6">
+            <!-- Team #2 member -->
+            <div class="team-member">
+              <!-- Image -->
+              <img class="img-responsive" src="<%= pub.pub_photos[0].photo_url %>" alt="" />
+              <div class="team-details">
+      <!--           <span class="deg">Creative</span>
+       -->          <!-- Name -->
+                <h4><%= link_to pub.name, "/pubs/#{pub.id}" %></h4>
+                <!-- Para -->
+                <p><%= pub.address1 %></p>
+                <p><%= pub.city %>, <%= pub.state %> <%= pub.zip %></p>
+                <p><%= pub.phone %> | <%= pub.email %> | <%= pub.website %></p>
+                
+                <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
+                  <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %> |
+                  <a href="/games">Add games</a>
+                <% end %>
+
+                <!-- Social -->
+                <!-- <div class="brand-bg">
+                  <a class="facebook" href="#"><i class="fa fa-facebook circle-3"></i></a>
+                  <a class="google-plus" href="#"><i class="fa fa-google-plus circle-3"></i></a>
+                  <a class="twitter" href="#"><i class="fa fa-twitter circle-3"></i></a>
+                  <a class="linkedin" href="#"><i class="fa fa-linkedin circle-3"></i></a>
+                </div> -->
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <% end %>
+          
+        </div>
+      </div>
+      <!-- Team #2 end -->
+    </div>
+  </div>
+

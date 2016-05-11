@@ -2,26 +2,48 @@
 (function() {
   angular.module("app").controller("gamesCtrl", function($scope, $http) {
     $scope.setup = function() {
+
       $http.get('/api/v1/games.json').then(function(response) {
         $scope.matches = response.data;
-        console.log($scope.matches.length);
+
+        // console.log($scope.matches.length);
         
         var dateToday = new Date();
         $scope.todayJson = JSON.stringify(dateToday);
-        // console.log($scope.today);  // "2014-01-01T23:28:56.782Z"
         $scope.today = JSON.parse($scope.todayJson);
-        // console.log($scope.today);
 
       });
+      $http.get('/api/v1/pubs.json').then(function(response){
+        $scope.pubs = response.data;
+
+      });
+      $http.get('/api/v1/pub_games.json').then(function(response){
+        $scope.pubGames = response.data;
+
+      });
+
     };
-    // var matches = $scope.matches;
-    // $scope.noUpcomingMatches = [];
-    // for (var i = 0; i < matches.length; i++) {
-    //   if ($scope.matches[i].date > $scope.today) {
-    //     $scope.noUpcomingMatches.push($scope.matches[i]);
-    //   }
-    // }
-    // console.log($scope.noUpcomingMatches);
+    $scope.addGameToPubGame = function(pub_id, game_id) {
+     
+      var params = {
+        pub_id: pub_id,
+        game_id: game_id
+      };
+     // if ($scope.pubGames.indexOf(pub_id, game_id) === -1) {
+      // $scope.pubGames.push(item);
+    
+      console.log('addGameToPubGame', params);
+      $http.post('/api/v1/pub_games.json', params).then(function(response) {
+        // console.log(response);
+        var notification = alertify.notify('Game added', 'success', 5, function(){  console.log('dismissed'); });
+        // alertify.success("game added");
+        
+      });
+    // $scope.pub_games.push({pub_id: pub_id, game_id: game_id});
+    // $scope.notification = alertify.notify('sample', 'success', 5, function(){  console.log('dismissed'); });
+      // }
+    };
+
     $scope.nochampMatches = [];
     $scope.nopremMatches = [];
     $scope.noereMatches = [];

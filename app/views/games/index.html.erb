@@ -16,10 +16,6 @@
       <datalist id="pubs">
         <option ng-repeat="match in matches">{{match.pub}}</option>
       </datalist>
-    <!--   <datalist id="dates">
-        <option ng-repeat="match in matches">{{match.date}}</option>
-      </datalist> -->
-
   <!-- Accordion starts -->
   <hr />
   <div class="panel-group" id="accordion">
@@ -38,9 +34,19 @@
       <div class="panel-body">
         <div class="match" ng-repeat="match in matches |filter: {league:'Champions League'} | filter:teamFilter | filter:dateFilter">
           <div ng-if='match.date > today'>
-            <h2>{{match.date}} {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+            <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
             <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
             <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+            <% if current_pub_user %>
+              <form>
+                <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                <select ng-model="pub_id">
+                  <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+                </select>
+                <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+              </form>
+         
+            <%end%>
             <hr>
           </div>
         </div>
@@ -66,28 +72,22 @@
       <!-- Panel body -->
       <div class="panel-body">
         <div class="match" ng-repeat="match in matches |filter: {league:'Premier League'} | filter:teamFilter | filter:dateFilter">
-         <div ng-if='match.date > today'>
-          <h2>
-          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-          <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+          <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <p>{{match.date}}</p>
           <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
           
           <% if current_pub_user %>
-            <%= form_tag '/pub_games', class: "form-horizontal", method: :post do %>
-              <%= hidden_field_tag :home_team, "{{match.homeTeamName}}" %>
-              <%= hidden_field_tag :away_team, "{{match.awayTeamName}}" %>
-              <%= hidden_field_tag :date, "{{match.date| date:'EEEE, MMMM d, y'}}" %>
-              <%= hidden_field_tag :time, "{{match.date | date:'h:mma'}}" %>
-              
-              <%= hidden_field_tag :league, "{{match.league}}" %>
-              
-              <%= collection_select :pub, :pub_id, @pubs, :id, :name %>
-            
-              <%= submit_tag "Add Game" %>
-            <%end%>
+            <form>
+              <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+              <select ng-model="pub_id">
+                <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+              </select>
+              <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+            </form>
+         
           <%end%>
           <hr>
-          </div>
+          
         </div>
         <div id="noPremMatches">
           <p ng-if='noUpcomingMatches()'></p><p> Loading...</p>
@@ -111,6 +111,16 @@
           <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
           <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
           <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <% if current_pub_user %>
+            <form>
+              <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+              <select ng-model="pub_id">
+                <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+              </select>
+              <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+            </form>
+         
+          <%end%>
           <hr>
           </div>
         </div>
@@ -133,10 +143,19 @@
       <div class="panel-body">
         <div class="match" ng-repeat="match in matches |filter: {league:'Bundesliga'} | filter:teamFilter | filter:dateFilter">
          <div ng-if='match.date > today'>
-          <h2>{{match.date}}
-          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
           <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
           <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <% if current_pub_user %>
+            <form>
+              <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+              <select ng-model="pub_id">
+                <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+              </select>
+              <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+            </form>
+         
+          <%end%>
           <hr>
           </div>
         </div>
@@ -158,10 +177,19 @@
       <div class="panel-body">
         <div class="match" ng-repeat="match in matches |filter: {league:'Serie A'} | filter:teamFilter | filter:dateFilter">
          <div ng-if='match.date > today'>
-          <h2>{{match.date}}
-          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
           <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
           <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <% if current_pub_user %>
+            <form>
+              <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+              <select ng-model="pub_id">
+                <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+              </select>
+              <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+            </form>
+         
+          <%end%>
           <hr>
           </div>
         </div>
@@ -183,10 +211,19 @@
       <div class="panel-body">
         <div class="match" ng-repeat="match in matches |filter: {league:'Eredivisie'} | filter:teamFilter | filter:dateFilter">
          <div ng-if='match.date > today'>
-          <h2>{{match.date}}
-          {{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+          <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
           <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
           <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+          <% if current_pub_user %>
+            <form>
+              <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+              <select ng-model="pub_id">
+                <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+              </select>
+              <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+            </form>
+         
+          <%end%>
           <hr>
           </div>
         </div>

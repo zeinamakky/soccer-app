@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :user_logins
   devise_for :pub_users
-  get '/' => 'pubs#index'
+
+  get '/' => 'pubs#main'
   get '/pubs' => 'pubs#index'
   get '/pubs/new' => 'pubs#new'
   post '/pubs' => 'pubs#create'
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/pubs' => 'pubs#index'
       get '/games' => 'games#index'
+      get '/pub_games' => 'pub_games#index'
+      post '/pub_games' => 'pub_games#create'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
@@ -64,25 +67,4 @@ Rails.application.routes.draw do
   #     resource :seller
   #   end
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
