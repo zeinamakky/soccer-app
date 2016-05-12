@@ -67,8 +67,16 @@
 
 <br />
 <div class="block-heading-two">
+
   <h3><span>Games Showing</span></h3>
 </div> 
+<!-- <div ng-app="app">
+  <div ng-controller="pubGamesCtrl" ng-init="setup()">
+  <div ng-repeat="game in games">
+  {{game.game.home_team_name}}
+  </div>
+  </div>
+</div> -->
 <% @games.each do |game| %>
     <% if game.game.date >= Date.current %>
 

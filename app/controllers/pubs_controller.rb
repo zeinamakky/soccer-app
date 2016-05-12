@@ -23,7 +23,7 @@ class PubsController < ApplicationController
     @reviews = Review.all
     @pub = Pub.find_by(id: params[:id])
     @photos = PubPhoto.where(pub_id: params[:id])
-    @games = PubGame.where(pub_id: params[:id])
+    @games = PubGame.where(pub_id: params[:id]).order(:game_id)
     render 'show.html.erb'
   end
 

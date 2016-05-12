@@ -11,11 +11,13 @@ Rails.application.routes.draw do
   get '/pubs/:id' => 'pubs#show'
   delete '/pubs/:id' => 'pubs#destroy'
 
+  get '/users' => 'users#index'
   get '/users/new' => 'users#new'
   post '/users' => 'users#create'
   get '/users/:id/edit' => 'users#edit'
   get '/users/:id' => 'users#show'
   patch '/users/:id' => 'users#update'
+  delete '/users/:id' => 'users#destroy'
 
   get '/games' => 'games#index'
   get '/games/:id' => 'games#show'

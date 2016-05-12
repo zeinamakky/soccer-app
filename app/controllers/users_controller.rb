@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   attr_reader :first_name, :last_name, :twitter_username, :fb_username, :avatar, :user_login_id
-
+  def index
+    @users = User.all
+  end
   def new
     'render new.html.erb'
   end
