@@ -27,8 +27,7 @@
                 <!-- Para -->
                 <p><%= pub.address1 %></p>
                 <p><%= pub.city %>, <%= pub.state %> <%= pub.zip %></p>
-                <p><%= pub.phone %> | <%= pub.email %> | <%= pub.website %></p>
-                
+                <p><a href="<%= pub.website %>" target="_blank"><%= pub.website %></a></p>
                 <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
                   <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %> |
                   <a href="/games">Add games</a>

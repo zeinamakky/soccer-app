@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
+//= require ui-bootstrap.min
+//= require addtocalendar
 //= require app
 //= require alertify
 //= require_tree .

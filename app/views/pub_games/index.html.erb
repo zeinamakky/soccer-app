@@ -35,6 +35,7 @@
     </div>
   </div>
 </div>
+
 <% @pub_games.each do |game| %>
   <% if game.game.date >= DateTime.now %>
     <h3><%= game.game.home_team_name %> vs <%= game.game.away_team_name %></h3></a>

@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       get '/games' => 'games#index'
       get '/pub_games' => 'pub_games#index'
       post '/pub_games' => 'pub_games#create'
+      get '/user_games' => 'user_games#index'
+      post '/user_games' => 'user_games#create'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

@@ -9,6 +9,8 @@ class Api::V1::PubGamesController < ApplicationController
       pub_id: params[:pub_id],
       game_id: params[:game_id]
     )
+    
+    
     render 'show.json.jbuilder'
   end
 end

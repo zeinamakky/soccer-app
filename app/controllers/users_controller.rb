@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    @user_games = UserGame.where(user_id: current_user_login.id)
     render 'show.html.erb'
   end
 

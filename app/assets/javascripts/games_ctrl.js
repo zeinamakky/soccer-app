@@ -13,36 +13,65 @@
         $scope.today = JSON.parse($scope.todayJson);
 
       });
-      $http.get('/api/v1/pubs.json').then(function(response){
+      $http.get('/api/v1/pubs.json').then(function(response) {
         $scope.pubs = response.data;
 
       });
-      $http.get('/api/v1/pub_games.json').then(function(response){
+      $http.get('/api/v1/pub_games.json').then(function(response) {
         $scope.pubGames = response.data;
 
       });
+      $http.get('/api/v1/user_games.json').then(function(response) {
+        $scope.userGames = response.data;
+
+      });
 
     };
+
     $scope.addGameToPubGame = function(pub_id, game_id) {
-     
-      var params = {
-        pub_id: pub_id,
-        game_id: game_id
-      };
-     // if ($scope.pubGames.indexOf(pub_id, game_id) === -1) {
-      // $scope.pubGames.push(item);
-    
-      console.log('addGameToPubGame', params);
-      $http.post('/api/v1/pub_games.json', params).then(function(response) {
-        // console.log(response);
-        var notification = alertify.notify('Game added', 'success', 5, function(){  console.log('dismissed'); });
-        // alertify.success("game added");
-        
+      var duplicate = $scope.pubGames.filter(function(pubGame) {
+        return pubGame.game_id === parseInt(game_id) && pubGame.pub_id === parseInt(pub_id);
       });
-    // $scope.pub_games.push({pub_id: pub_id, game_id: game_id});
-    // $scope.notification = alertify.notify('sample', 'success', 5, function(){  console.log('dismissed'); });
-      // }
+      console.log(duplicate);
+      
+      if (duplicate.length === 0) {
+        var params = {
+          pub_id: pub_id,
+          game_id: game_id
+        };
+        $http.post('/api/v1/pub_games.json', params).then(function(response) {
+          var notification = alertify.notify('Game added', 'success', 5, function(){  console.log('dismissed'); });
+        
+        });
+      } else {
+          var notification = alertify.notify('Game already added', 'error', 5, function(){  console.log('dismissed'); });
+
+      }
+
     };
+
+    $scope.addGameToUserGame = function(pub_id, game_id, user_id) {
+      var duplicates = $scope.userGames.filter(function(userGame) {
+        return userGame.game_id === parseInt(game_id) && userGame.pub_id === parseInt(pub_id) && userGame.user_id === user_id;
+      });
+      if (duplicates.length === 0) {
+        var params = {
+          pub_id: pub_id,
+          game_id: game_id,
+          user_id: user_id
+        };
+        console.log('addGameToUserGame', params);
+        $http.post('/api/v1/user_games.json', params).then(function(response) {
+          var notification = alertify.notify('Game added', 'success', 5, function(){  console.log('dismissed'); });
+        });
+      } else {
+        var notification = alertify.notify('Game already added', 'error', 5, function(){  console.log('dismissed'); });
+      }
+    };
+
+    
+
+
 
     $scope.nochampMatches = [];
     $scope.nopremMatches = [];
@@ -69,7 +98,7 @@
           }
         }
       });
-      console.log($scope.nochampMatches.length);
+      // console.log($scope.nochampMatches.length);
 
       if ($scope.nochampMatches.length === 0) {
         document.getElementById('noChampMatches').innerHTML = "No upcoming matches.";

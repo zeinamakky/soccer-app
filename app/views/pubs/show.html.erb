@@ -51,7 +51,7 @@
       <%= @pub.address1 %>
       <br /><%= @pub.city %>, <%= @pub.state %> <%= @pub.zip %></p>
       <br /><%= @pub.phone %> 
-      <br /><a mailto="<%= @pub.email %>"><%= @pub.email %></a>
+      <br /><a href="mailto:<%= @pub.email %>" target="_top"><%= @pub.email %></a>
       <br /><a href="<%= @pub.website %>" target="_blank"><%= @pub.website %></a>
       <br />
       <% if current_pub_user && current_pub_user.id == @pub.pub_user_id %>

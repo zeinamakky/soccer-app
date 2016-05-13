@@ -84,18 +84,29 @@
     <!-- Tab Pane - Portfolio -->
     <div class="tab-pane fade" id="portfolio">
       <!-- Portfolio -->          
-      <div class="portfolio">
-        <h4><i class="fa fa-cloud color"></i> My Works</h4>
+      <div>
+        <h4>My Games</h4>
         <hr />
-        <!-- Work images with lightbox -->
-        <a href="img/work/small/1.jpg" class="lightbox"><img src="img/work/small/1.jpg" alt="" class="img-responsive img-thumbnail" /></a>
-        <a href="img/work/small/2.jpg" class="lightbox"><img src="img/work/small/2.jpg" alt="" class="img-responsive img-thumbnail" /></a>
-        <a href="img/work/small/3.jpg" class="lightbox"><img src="img/work/small/3.jpg" alt="" class="img-responsive img-thumbnail" /></a>
-        <a href="img/work/small/4.jpg" class="lightbox"><img src="img/work/small/4.jpg" alt="" class="img-responsive img-thumbnail" /></a>
-        <a href="img/work/small/5.jpg" class="lightbox"><img src="img/work/small/5.jpg" alt="" class="img-responsive img-thumbnail" /></a>
-        <a href="img/work/small/6.jpg" class="lightbox"><img src="img/work/small/6.jpg" alt="" class="img-responsive img-thumbnail" /></a>
-        <a href="img/work/small/7.jpg" class="lightbox"><img src="img/work/small/7.jpg" alt="" class="img-responsive img-thumbnail" /></a>
-        <a href="img/work/small/8.jpg" class="lightbox"><img src="img/work/small/8.jpg" alt="" class="img-responsive img-thumbnail" /></a>
+        <div class="row">
+  <div class="col-md-9">
+    <div id='calendar' style="padding-top:50px">
+    </div>
+  </div>
+  <div class="col-md-3" id="row_padding">
+    <% if @user_events != [] %>
+      <h3>Your upcoming events</h3>
+      <% @user_games.each do |user_game| %>
+        <div class="well">
+        game<h4><%= user_game.game.date.strftime("%A, %B %d") %></h4>
+        <p><strong><a href="/events/<%= user_game.id %>"><%= user_game %></a></strong></p>
+        <p><strong>Where: </strong><%= user_game.pub.name %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <h3>You have no upcoming events.</h3>
+    <% end %>
+  </div>
+</div>
       </div>
     </div>
     
