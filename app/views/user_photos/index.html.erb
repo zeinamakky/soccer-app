@@ -13,7 +13,7 @@
 
   <tbody>
     <% @user_photos.each do |user_photo| %>
-      <tr><td><img src="/user_photos/5" width="40%"></td>
+      <tr><td><img src="/user_photos/<%= user_photo.id %>" width="40%"></td>
         <td><%= user_photo.filename %></td>
         <td><%= button_to 'Download', user_photo, method: :get %></td>
         <td><%= button_to 'Destroy', user_photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,5 +1,5 @@
 class UserPhoto < ActiveRecord::Base
-
+  belongs_to :user
   validate :file_size_under_one_mb
 
   def initialize(params = {})
