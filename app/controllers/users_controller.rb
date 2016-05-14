@@ -4,6 +4,8 @@ class UsersController < ApplicationController
     @users = User.all
   end
   def new
+    @user_photo = UserPhoto.new
+    @user = User.new
     'render new.html.erb'
   end
 

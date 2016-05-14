@@ -4,9 +4,9 @@
   <header>
     <ul class="list-inline">
       <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-      <li><a href="#qualification" data-toggle="tab">Qualification</a></li>
+      <li><a href="#teams" data-toggle="tab">My Teams</a></li>
       <li><a href="#games" data-toggle="tab">My Games</a></li>
-      <li><a href="#contact" data-toggle="tab">Contact</a></li>
+      <li><a href="#messages" data-toggle="tab">Messages</a></li>
     </ul>
   </header>
   <!-- tab Content -->
@@ -82,29 +82,29 @@
     </div>
     
     <!-- Tab Pane - Portfolio -->
-    <div class="tab-pane fade" id="games">
-      <!-- Portfolio -->          
-      <h4>My Games</h4>
-      <hr />
-      <div class="row">
-  
-        <% if @user_events != [] %>
-          <% @user_games.each do |user_game| %>
-          <!-- <div class="well"> -->
-            <h4><%= user_game.game.date.strftime("%A, %B %d") %></h4>
-            <p><strong><%= user_game.game.home_team_name %> vs <%= user_game.game.away_team_name %> </strong></p>
-            <p><strong>Where: </strong><a href="/pubs/<%= user_game.pub_id %>"><%= user_game.pub.name %></a></p>
-            <!-- </div> -->
-            <hr>
-          <% end %>
-        <% else %>
-          <h3>You have no upcoming events.</h3>
-        <% end %>
-  <!-- </div> -->
+    <%= if current_user_login %>         
 
-      </div>
-    </div>
+      <div class="tab-pane fade" id="games">
+        <!-- Portfolio --> 
+        <h4>My Games</h4>
+        <hr />
+        <div class="row">
     
+          <% if @user_events != [] %>
+            <% @user_games.each do |user_game| %>
+            <!-- <div class="well"> -->
+              <h4><%= user_game.game.date.strftime("%A, %B %d") %></h4>
+              <p><strong><%= user_game.game.home_team_name %> vs <%= user_game.game.away_team_name %> </strong></p>
+              <p><strong>Where: </strong><a href="/pubs/<%= user_game.pub_id %>"><%= user_game.pub.name %></a></p>
+              <!-- </div> -->
+              <hr>
+            <% end %>
+          <% else %>
+            <h3>You have no upcoming events.</h3>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <!-- Tab Pane -->
     <div class="tab-pane fade" id="contact">
       <!-- Contact Content -->

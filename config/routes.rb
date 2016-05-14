@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_photos
   devise_for :user_logins
   devise_for :pub_users
 
