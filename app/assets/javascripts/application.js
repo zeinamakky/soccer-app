@@ -15,6 +15,7 @@
 //= require angular
 //= require ui-bootstrap.min
 //= require addtocalendar
+//= require bootstrap-datepicker
 //= require app
 //= require alertify
 //= require_tree .

@@ -37,12 +37,12 @@
 </div>
 
 <% @pub_games.each do |game| %>
-  <% if game.game.date >= DateTime.now %>
-    <h3><%= game.game.home_team_name %> vs <%= game.game.away_team_name %></h3></a>
-    <p><b>Date:</b> <%= game.game.date.strftime("%A, %d %b %Y") %> at <%= game.game.date.in_time_zone("Central Time (US & Canada)").strftime("%l:%M %p") %></p>
+  <% if game.date >= DateTime.now %>
+    <h3><%= game.home_team_name %> vs <%= game.away_team_name %></h3></a>
+    <p><b>Date:</b> <%= game.date.strftime("%A, %d %b %Y") %> at <%= game.date.in_time_zone("Central Time (US & Canada)").strftime("%l:%M %p") %></p>
     
     <h5>Showing at the following pubs:</h5>
-    <% @pubs.where(id: game.pub_id).each do |pub|%>
+    <% game.pubs.each do |pub|%>
       <%= pub.name %>, <%= pub.city %>
     <%end%>
     <hr>

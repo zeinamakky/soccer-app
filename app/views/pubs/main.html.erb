@@ -16,9 +16,11 @@
   Search by location: <%= text_field_tag :search, nil, class:"form-control" %>
   <%= submit_tag "Submit", class: "btn btn-default" %>
 <% end %>
+
   <%= form_tag "/pub_games", class:"navbar-form", method: :get do %>
   Search by day: 
-  <%= select_date Date.today, prefix: :start_date %>
+ <%= date_field_tag :search_date, 'datepicker', class: "form-control" %>
+  
   <%= submit_tag "Submit", class: "btn btn-default" %>
 <% end %>
 <div class="clearfix"></div>

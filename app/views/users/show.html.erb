@@ -5,7 +5,7 @@
     <ul class="list-inline">
       <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
       <li><a href="#qualification" data-toggle="tab">Qualification</a></li>
-      <li><a href="#portfolio" data-toggle="tab">Portfolio</a></li>
+      <li><a href="#games" data-toggle="tab">My Games</a></li>
       <li><a href="#contact" data-toggle="tab">Contact</a></li>
     </ul>
   </header>
@@ -82,31 +82,26 @@
     </div>
     
     <!-- Tab Pane - Portfolio -->
-    <div class="tab-pane fade" id="portfolio">
+    <div class="tab-pane fade" id="games">
       <!-- Portfolio -->          
-      <div>
-        <h4>My Games</h4>
-        <hr />
-        <div class="row">
-  <div class="col-md-9">
-    <div id='calendar' style="padding-top:50px">
-    </div>
-  </div>
-  <div class="col-md-3" id="row_padding">
-    <% if @user_events != [] %>
-      <h3>Your upcoming events</h3>
-      <% @user_games.each do |user_game| %>
-        <div class="well">
-        game<h4><%= user_game.game.date.strftime("%A, %B %d") %></h4>
-        <p><strong><a href="/events/<%= user_game.id %>"><%= user_game %></a></strong></p>
-        <p><strong>Where: </strong><%= user_game.pub.name %></p>
-        </div>
-      <% end %>
-    <% else %>
-      <h3>You have no upcoming events.</h3>
-    <% end %>
-  </div>
-</div>
+      <h4>My Games</h4>
+      <hr />
+      <div class="row">
+  
+        <% if @user_events != [] %>
+          <% @user_games.each do |user_game| %>
+          <!-- <div class="well"> -->
+            <h4><%= user_game.game.date.strftime("%A, %B %d") %></h4>
+            <p><strong><%= user_game.game.home_team_name %> vs <%= user_game.game.away_team_name %> </strong></p>
+            <p><strong>Where: </strong><a href="/pubs/<%= user_game.pub_id %>"><%= user_game.pub.name %></a></p>
+            <!-- </div> -->
+            <hr>
+          <% end %>
+        <% else %>
+          <h3>You have no upcoming events.</h3>
+        <% end %>
+  <!-- </div> -->
+
       </div>
     </div>
     
