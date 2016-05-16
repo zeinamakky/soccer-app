@@ -1,0 +1,65 @@
+<div ng-app="app">
+  <div ng-controller="gamesCtrl" ng-init="setup()">
+
+    <div class="main-block">
+          
+      <!-- Page heading two starts -->
+      
+      <div class="page-heading-two">
+        <div class="container">
+          <h2>Teams <span>Something goes here</span></h2>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      
+      <!-- Page heading two ends -->
+    
+      <div class="container">
+        
+        <div class="row">
+          
+          <div class="col-md-3 col-sm-6" ng-repeat="team in teams | filter: {league: 'Premier League'}">
+            <!-- Ecommerce UI #3 -->
+            <div class="ecom-ui ecom-ui-three">
+              <!-- Hot tag -->
+              <!-- <span class="ecom-hot bg-green">New</span> -->
+              <div class="img-container">
+                <!-- Product Image -->
+                <a href="#"><img class="img-responsive" src="/teams/{{team.icon}}" alt="" /></a>
+              </div>
+              <!-- product details -->
+              <div class="product-details">
+                <!-- product title -->
+                <h5>{{team.name}}</h5>
+                <div class="clearfix"></div>
+                <hr />
+                <!-- ecom button -->
+                <p><% if current_user_login %>
+                  <form>
+                    <input type="hidden" ng-model="team_id" ng-value="team.id"></input>
+                    <button class="btn btn-color pull-left" ng-click="addTeamToUserAllegiance(team.id, <%= current_user_login.id %>)">Add team to your profile</button>
+                  </form>
+                <% end %>
+                </p>
+                <!-- Media icon -->
+                <!-- <span class="p-media pull-right">
+                  <a href="#" class="b-tooltip" data-placement="top" title="21"><i class="fa fa-heart color"></i></a>&nbsp;
+                  <a href="#" class="b-tooltip" data-placement="top" title="49"><i class="fa fa-share-alt color"></i></a>&nbsp;
+                  <a href="#" class="b-tooltip" data-placement="top" title="35"><i class="fa fa-paper-plane-o color"></i></a>
+                </span> -->
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <!-- Ecommerce UI #3 -->
+          </div>
+          
+          
+          
+        </div>
+        
+        
+                
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,37 +16,19 @@
     
     <div class="form-group">
       <%=label_tag :twitter_username, "Twitter username", class: "col-sm-2 control-label" %>
-      <%= text_field_tag :twitter_username, " ", class: "col-sm-10" %>
+      <%= text_field_tag :twitter_username, "", class: "col-sm-10" %>
     </div>
     <div class="form-group">
       <%=label_tag :fb_username, "Facebook", class: "col-sm-2 control-label" %>
-      <%= text_field_tag :fb_username, " ", class: "col-sm-10" %>
+      <%= text_field_tag :fb_username, "", class: "col-sm-10" %>
     </div>
     <div class="form-group">
       <%=label_tag :avatar, "Picture", class: "col-sm-2 control-label" %>
-      <%= text_field_tag :avatar, " ", class: "col-sm-10" %>
+      <%= text_field_tag :avatar, "", class: "col-sm-10" %>
     </div>
     
 
-    <%= form_for(@user_photo) do |f| %>
-      <% if @user_photo.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user_photo.errors.count, "error") %> prohibited this user_photo from being saved:</h2>
-          <ul>
-          <% @user_photo.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
 
-      <div class="field">
-        <%= f.file_field :file %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
-    <% end %>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <%= submit_tag "Submit" %>

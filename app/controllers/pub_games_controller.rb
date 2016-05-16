@@ -1,13 +1,18 @@
 class PubGamesController < ApplicationController
   def index
     @pubs = Pub.all
-    @pub_games = PubGame.all
+    
+    @team = Team.all
 
-    search_date = params[:search_date].to_datetime
+    if params[:search_date]
+      search_date = params[:search_date].to_datetime
 
-    if search_date
       @pub_games = Game.where(date: search_date..search_date+1)
+    
+    else 
+      @pub_games = Game.where('date >= ?', 5.days.ago)
     end
+
   end
   
   def create

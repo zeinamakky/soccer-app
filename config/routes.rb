@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/pubs/:id' => 'pubs#show'
   delete '/pubs/:id' => 'pubs#destroy'
 
+  get '/teams' => 'teams#index'
+
   get '/users' => 'users#index'
   get '/users/new' => 'users#new'
   post '/users' => 'users#create'
@@ -37,6 +39,9 @@ Rails.application.routes.draw do
       post '/pub_games' => 'pub_games#create'
       get '/user_games' => 'user_games#index'
       post '/user_games' => 'user_games#create'
+      get '/teams' => 'teams#index'
+      get '/user_allegiances' => 'user_allegiances#index'
+      post '/user_allegiances' => 'user_allegiances#create'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

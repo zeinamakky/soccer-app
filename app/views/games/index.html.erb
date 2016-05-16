@@ -1,40 +1,240 @@
 <div class="container">
-
   <h1>Upcoming Games</h1>
- 
   <div ng-app="app">
     <div ng-controller="gamesCtrl" ng-init="setup()">
-      <div>
-        <h5>Filter by team: <input ng-model="teamFilter"> Filter by date: <input ng-model="dateFilter"></h5>
-        
-        <datalist id="teams">
-          <option ng-repeat="match in matches">{{match.awayTeamName}}</option>
-          <option ng-repeat="match in matches">{{match.homeTeamName}}</option>
+      
+      <h5>Filter by team: <input ng-model="teamFilter"> Filter by date: <input ng-model="dateFilter" data-provide='datepicker'></h5>
+      
+      <datalist id="teams">
+        <option ng-repeat="match in matches">{{match.awayTeamName}}</option>
+        <option ng-repeat="match in matches">{{match.homeTeamName}}</option>
+      </datalist>
 
-        </datalist>
-
-        <datalist id="pubs">
-          <option ng-repeat="match in matches">{{match.pub}}</option>
-        </datalist>
-    <!-- Accordion starts -->
-    <hr />
+      <datalist id="pubs">
+        <option ng-repeat="match in matches">{{match.pub}}</option>
+      </datalist>
+      
+      <!-- Accordion starts -->
+      <hr />
       <div class="panel-group" id="accordion">
-       <!-- Panel. Use "panel-XXX" class for different colors. Replace "XXX" with color. -->
+      <!-- Panel. Use "panel-XXX" class for different colors. Replace "XXX" with color. -->
+        
+        <!-- champions league-->
+        
+        <div class="panel panel-default"> 
+          <!-- Panel heading -->
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero">Champions League</a>
+            </h2>
+          </div>
+          <div id="collapseZero" class="panel-collapse collapse in">
+          <!-- Panel body -->
+            <div class="panel-body">
+              <div class="match" ng-repeat="match in matches | orderBy : 'date '|filter: {league:'Champions League'} | filter:teamFilter | filter: equalDate('date', dateFilter)">
+                <div ng-if='match.date > today'>
+                  <h2>{{ match.homeTeamName}}
+                    <img ng-src="teams/{{match.homeTeamIcon}}" class="team-icon" />
+                    vs 
+                    <img ng-src="teams/{{match.awayTeamIcon }}" class="team-icon"/> 
+                    {{ match.awayTeamName}}
+                  </h2>
+                  <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+                  <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+                  <% if current_pub_user %>
+                    <form>
+                      <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                      <select ng-model="pub_id">
+                        <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+                      </select>
+                      <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                    </form>
+                  <%end%>
+                  <% if current_user_login %>
+                  <form ng-if="match.pubs.length > 0">
+                    <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
+                    </select>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%= current_user_login.id %>)">Add game to your profile</button>
+                  </form>
+                <% end %>
+                  <hr>
+                </div>
+              </div>
+              <div id="noChampMatches">
+                <p ng-if="noUpcomingMatches()"></p><p>Loading...</p>
+              </div> 
+            </div>
+          </div>
+        </div>
+      
+        <!-- premier-->
+
+
         <div class="panel panel-default"> 
         <!-- Panel heading -->
-         <div class="panel-heading">
-          <h2 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero">
-             Champions League
-            </a>
-          </h2>
-         </div>
-         <div id="collapseZero" class="panel-collapse collapse in">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Premier League</a>
+            </h2>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in">
           <!-- Panel body -->
-          <div class="panel-body">
-            <div class="match" ng-repeat="match in matches |filter: {league:'Champions League'} | filter:teamFilter | filter:dateFilter">
-              <div ng-if='match.date > today'>
-                <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+            <div class="panel-body">
+              <div class="match" ng-repeat="match in matches | orderBy : 'date '|filter: {league:'Premier League'} | filter:teamFilter | filter: equalDate('date', dateFilter)">
+                <h2>{{ match.homeTeamName}}
+                  <img ng-src="teams/{{match.homeTeamIcon}}" class="team-icon" />
+                  vs 
+                  <img ng-src="teams/{{match.awayTeamIcon }}" class="team-icon"/> 
+                  {{ match.awayTeamName}}
+                </h2>
+                <p>{{match.date}}</p> 
+                <% if current_pub_user %>
+                  <form>
+                    <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+                    </select>
+                    <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                  </form>
+                <%end%>
+                <% if current_user_login %>
+                  <form ng-if="match.pubs.length > 0">
+                    <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
+                    </select>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%= current_user_login.id %>)">Add game to your profile</button>
+                  </form>
+                <% end %>
+                <hr>
+              </div>
+            </div>
+            <div id="noPremMatches">
+              <p ng-if='noUpcomingMatches()'></p><p> Loading...</p>
+            </div>
+          </div>
+        </div>
+        <!-- ligue1-->
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Ligue 1</a>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <div class="match" ng-repeat="match in matches | orderBy : 'date ' | filter: {league:'Ligue 1'} | filter:teamFilter | filter: equalDate('date', dateFilter)">
+                <div ng-if='match.date > today'>
+                  <h2>{{ match.homeTeamName}}
+                  <img ng-src="teams/{{match.homeTeamIcon}}" class="team-icon" />
+                  vs 
+                  <img ng-src="teams/{{match.awayTeamIcon }}" class="team-icon"/> 
+                  {{ match.awayTeamName}}
+                  </h2>
+                  <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+                  <% if current_pub_user %>
+                    <form>
+                      <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                      <select ng-model="pub_id">
+                        <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+                      </select>
+                      <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                    </form>
+                  <%end%>
+                  <% if current_user_login %>
+                  <form ng-if="match.pubs.length > 0">
+                    <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
+                    </select>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                  </form>
+                <% end %>
+                  <hr>
+                </div>
+              </div>
+            </div>
+            <div id="noLigueMatches">
+            <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
+            </div> 
+          </div>
+        </div>
+
+        <!-- BULI -->
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+            Bundesliga
+            </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <div class="match" ng-repeat="match in matches |orderBy : 'date ' | filter: {league:'Bundesliga'} | filter:teamFilter | filter: equalDate('date', dateFilter)">
+                <div ng-if='match.date > today'>
+                  <h2>{{ match.homeTeamName}}
+                  <img ng-src="teams/{{match.homeTeamIcon}}" class="team-icon" />
+                  vs 
+                  <img ng-src="teams/{{match.awayTeamIcon }}" class="team-icon"/> 
+                  {{ match.awayTeamName}}
+                  </h2>
+                  <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+                  
+                  <% if current_pub_user %>
+                    <form>
+                      <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                        <select ng-model="pub_id">
+                          <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+                        </select>
+                      <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                    </form>
+                  <%end%>
+                  <% if current_user_login %>
+                  <form ng-if="match.pubs.length > 0">
+                    <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
+                    </select>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                  </form>
+                <% end %>
+                  <hr>
+                </div>
+              </div>
+              <div id="noBuliMatches">
+                <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SERIE A -->
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+            Serie A
+            </a>
+            </h4>
+          </div>
+          <div id="collapseFour" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <div class="match" ng-repeat="match in matches |orderBy : 'date ' | filter: {league:'Serie A'} | filter:teamFilter | filter: equalDate('date', dateFilter)">
+               <div ng-if='match.date > today'>
+                <h2>{{ match.homeTeamName}}
+                <img ng-src="teams/{{match.homeTeamIcon}}" class="team-icon" />
+                vs 
+                <img ng-src="teams/{{match.awayTeamIcon }}" class="team-icon"/> 
+                {{ match.awayTeamName}}
+                </h2>
                 <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
                 <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
                 <% if current_pub_user %>
@@ -45,246 +245,85 @@
                     </select>
                     <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
                   </form>
-             
                 <%end%>
+                <% if current_user_login %>
+                  <form ng-if="match.pubs.length > 0">
+                    <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
+                    </select>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                  </form>
+                <% end %>
                 <hr>
               </div>
             </div>
-            <div id="noChampMatches">
-              <p ng-if="noUpcomingMatches()"></p><p>Loading...</p>
-            </div>
-            
-          </div>
-         </div>
-        </div>
-
-
-        <div class="panel panel-default"> 
-        <!-- Panel heading -->
-         <div class="panel-heading">
-          <h2 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-             Premier League
-            </a>
-          </h2>
-         </div>
-         <div id="collapseOne" class="panel-collapse collapse in">
-          <!-- Panel body -->
-          <div class="panel-body">
-            <div class="match" ng-repeat="match in matches |filter: {league:'Premier League'} | filter:teamFilter | filter:dateFilter">
-              <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-              <p>{{match.date}}</p> 
-              <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
-              
-              <% if current_pub_user %>
-                <form>
-                  <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
-                  <select ng-model="pub_id">
-                    <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
-                  </select>
-                  <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
-                </form>
-             
-              <%end%>
-              <% if current_user_login %>
-                <form>
-                  <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
-                  <!-- <input type="hidden" ng-model="user_id" ng-value="<%=current_user_login.id%>"></input> -->
-                  <select ng-model="pub_id">
-                    <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
-                  </select>
-                  
-                  <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
-                </form>
-                <div ng-init="pubs=match.pubs; selection={}"
-                <h4> Selected {{ selection.pub }} shown outside paragraph {{selection.pub.city}}</h4>
-
-                  <div ng-repeat="pub in match.pubs">
-                    <p>{{ pub.name }} -
-                    <input ng-model="selection.pub" type="radio" value="{{ pub.name }}" required>
-                    <input ng-model="selection.pubAddress" type=hidden value="{{ pub.address1 }}, {{pub.city}}">
-                    
-                    </p>
-                    <h3> Selected {{ selection.pub }} shown inside paragraph {{pub.city}}</h3>
-                 
-                  </div>
-                  <addtocalendar
-
-                  start-date={{match.cal_time}}
-                  end-date={{match.cal_end_time}}
-                  title="{{match.homeTeamName}} vs {{match.awayTeamName}}"
-                  location={{selection.pub}}
-                  class-name="btn btn-sm btn-default dropdown-toggle"
-                  description="Football match at {{selection.pub}}. Address: {{selection.pub.address1}}"
-                  btn-text="Add to calendar">
-                  </addtocalendar>
-                  </div>
-                
-                
-              <% end %>
-
-              <hr>
-              
-            </div>
-            <div id="noPremMatches">
-              <p ng-if='noUpcomingMatches()'></p><p> Loading...</p>
-            </div>
-          </div>
-         </div>
-        </div>
-
-        <div class="panel panel-default">
-         <div class="panel-heading">
-          <h2 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-             Ligue 1
-            </a>
-          </h2>
-         </div>
-         <div id="collapseTwo" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="match" ng-repeat="match in matches | filter: {league:'Ligue 1'} | filter:teamFilter">
-              <div ng-if='match.date > today'>
-              <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-              <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
-              <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
-              <% if current_pub_user %>
-                <form>
-                  <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
-                  <select ng-model="pub_id">
-                    <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
-                  </select>
-                  <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
-                </form>
-             
-              <%end%>
-              <hr>
-              </div>
-            </div>
-           <div id="noLigueMatches">
-            <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
-           </div> 
-          </div>
-          
-         </div>
-        </div>
-        <div class="panel panel-default">
-         <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-             Bundesliga
-            </a>
-          </h4>
-         </div>
-         <div id="collapseThree" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="match" ng-repeat="match in matches |filter: {league:'Bundesliga'} | filter:teamFilter | filter:dateFilter">
-             <div ng-if='match.date > today'>
-              <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-              <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
-              <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
-              <% if current_pub_user %>
-                <form>
-                  <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
-                  <select ng-model="pub_id">
-                    <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
-                  </select>
-                  <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
-                </form>
-             
-              <%end%>
-              <hr>
-              </div>
-            </div>
-            <div id="noBuliMatches">
-              <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
-            </div>
-          </div>
-         </div>
-        </div>
-        <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-             Serie A
-            </a>
-          </h4>
-        </div>
-        <div id="collapseFour" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="match" ng-repeat="match in matches |filter: {league:'Serie A'} | filter:teamFilter | filter:dateFilter">
-             <div ng-if='match.date > today'>
-              <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-              <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
-              <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
-              <% if current_pub_user %>
-                <form>
-                  <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
-                  <select ng-model="pub_id">
-                    <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
-                  </select>
-                  <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
-                </form>
-             
-              <%end%>
-              <hr>
-              </div>
-            </div>
             <div id="noSerieMatches">
-              <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
+            <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
             </div>
           </div>
           </div>
         </div>
+
+
+
+        <!-- EREDIVISIE -->
         <div class="panel panel-default">
-         <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-             Eredivisie
-            </a>
-          </h4>
-         </div>
-         <div id="collapseFive" class="panel-collapse collapse">
-          <div class="panel-body">
-            <div class="match" ng-repeat="match in matches |filter: {league:'Eredivisie'} | filter:teamFilter | filter:dateFilter">
-             <div ng-if='match.date > today'>
-              <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
-              <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
-              <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
-              <% if current_pub_user %>
-                <form>
-                  <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
-                  <select ng-model="pub_id">
-                    <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
-                  </select>
-                  <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
-                </form>
-             
-              <%end%>
-              <hr>
+          <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Eredivisie</a>
+            </h4>
+          </div>
+          <div id="collapseFive" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <div class="match" ng-repeat="match in matches | orderBy : 'date ' | filter: {league:'Eredivisie'} | filter:teamFilter | filter: equalDate('date', dateFilter)">
+                <div ng-if='match.date > today'>
+                  <h2>{{ match.homeTeamName}} vs {{ match.awayTeamName}}</h2>
+                  <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
+                  <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+                  <% if current_pub_user %>
+                    <div ng-if='match.pubs.length > 0'>
+                      <form>
+                        <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                          <select ng-model="pub_id">
+                          <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+                        </select>
+                        <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                      </form>
+                    </div>
+                  <%end%>
+                  <% if current_user_login %>
+                  <form ng-if="match.pubs.length > 0">
+                    <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
+                    </select>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                  </form>
+                <% end %>
+                  <hr>
+                </div>
+              </div>
+              <div id="noEreMatches">
+              <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
               </div>
             </div>
-            <div id="noEreMatches">
-             <p ng-if="noUpcomingMatches()"></p><p> Loading...</p>
-            </div>
           </div>
-         </div>
-         </div>
         </div>
-        </div>
-      </div>
-  <!-- Accordion ends -->
-    </div>
-  </div>
-</div>
-  
+
+
+      </div><!-- Accordion ends -->
+    </div><!-- controller -->
+  </div><!-- app -->
+</div><!-- contqainer -->
 
 
 
-      
 
-      
 
-  
+
+
+
+
 
 

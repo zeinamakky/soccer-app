@@ -1,5 +1,6 @@
 /* global angular */
 (function() {
+  
   angular.module("app").controller("gamesCtrl", function($scope, $http) {
     $scope.setup = function() {
 
@@ -25,8 +26,13 @@
         $scope.userGames = response.data;
 
       });
+      $http.get('/api/v1/teams.json').then(function(response) {
+        $scope.teams = response.data;
+
+      });
 
     };
+    
 
     $scope.addGameToPubGame = function(pub_id, game_id) {
       var duplicate = $scope.pubGames.filter(function(pubGame) {
@@ -40,11 +46,11 @@
           game_id: game_id
         };
         $http.post('/api/v1/pub_games.json', params).then(function(response) {
-          var notification = alertify.notify('Game added', 'success', 5, function(){  console.log('dismissed'); });
+          var notification = alertify.notify('Game added', 'success', 1, function(){  console.log('dismissed'); });
         
         });
       } else {
-          var notification = alertify.notify('Game already added', 'error', 5, function(){  console.log('dismissed'); });
+          var notification = alertify.notify('Game already added', 'error', 1, function(){  console.log('dismissed'); });
 
       }
 
@@ -52,7 +58,7 @@
 
     $scope.addGameToUserGame = function(pub_id, game_id, user_id) {
       var duplicates = $scope.userGames.filter(function(userGame) {
-        return userGame.game_id === parseInt(game_id) && userGame.pub_id === parseInt(pub_id) && userGame.user_id === user_id;
+        return userGame.game_id === parseInt(game_id) && userGame.pub_id === parseInt(pub_id) && userGame.user_id === parseInt(user_id);
       });
       if (duplicates.length === 0) {
         var params = {
@@ -62,10 +68,10 @@
         };
         console.log('addGameToUserGame', params);
         $http.post('/api/v1/user_games.json', params).then(function(response) {
-          var notification = alertify.notify('Game added', 'success', 5, function(){  console.log('dismissed'); });
+          var notification = alertify.notify('Game added', 'success', 1, function(){  console.log('dismissed'); });
         });
       } else {
-        var notification = alertify.notify('Game already added', 'error', 5, function(){  console.log('dismissed'); });
+        var notification = alertify.notify('Game already added', 'error', 1, function(){  console.log('dismissed'); });
       }
     };
 
@@ -132,6 +138,24 @@
         document.getElementById('noLigueMatches').innerHTML = " ";
       }
     };
+
+    $scope.equalDate = function(prop, value) {
+
+      return function(item) {
+        if (!value) {
+          return true;
+          console.log("games this day");
+
+        }
+        var d1 = new Date(item[prop]);
+        var d2 = new Date(value);
+        return d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate() && d1.getFullYear() === d2.getFullYear();
+        // if (!item) {
+        //   document.getElementsByClassName("panel-body").innerHTML = "No matches on this date";
+        // }
+      }
+    };
+
     window.$scope = $scope;
   });
 })();

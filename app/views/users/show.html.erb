@@ -82,7 +82,7 @@
     </div>
     
     <!-- Tab Pane - Portfolio -->
-    <%= if current_user_login %>         
+    <% if current_user_login %>         
 
       <div class="tab-pane fade" id="games">
         <!-- Portfolio --> 
@@ -92,12 +92,27 @@
     
           <% if @user_events != [] %>
             <% @user_games.each do |user_game| %>
-            <!-- <div class="well"> -->
               <h4><%= user_game.game.date.strftime("%A, %B %d") %></h4>
               <p><strong><%= user_game.game.home_team_name %> vs <%= user_game.game.away_team_name %> </strong></p>
               <p><strong>Where: </strong><a href="/pubs/<%= user_game.pub_id %>"><%= user_game.pub.name %></a></p>
-              <!-- </div> -->
-              <hr>
+              
+                 
+                  <div ng-app="app">
+                  <div ng-controller="gamesCtrl" ng-init="setup()">
+                  <addtocalendar
+
+                  start-date="<%= user_game.game.date.strftime("%Y%m%dT%H%M%S") %>"
+                  end-date="<%= (user_game.game.date + 2*60*60).strftime("%Y%m%dT%H%M%S")%>"
+                  title="<%= user_game.game.home_team_name %> vs <%= user_game.game.away_team_name %>"
+                  location="<%= user_game.pub.name %>"
+                  class-name="btn btn-sm btn-default dropdown-toggle"
+                  description="Football match at <%= user_game.pub.name %>. Address: <%= user_game.pub.address1 %>"
+                  btn-text="Add to calendar">
+                  </addtocalendar>
+             
+
+              <hr></div></div>
+
             <% end %>
           <% else %>
             <h3>You have no upcoming events.</h3>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514185747) do
+ActiveRecord::Schema.define(version: 20160515171526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,17 @@ ActiveRecord::Schema.define(version: 20160514185747) do
     t.string   "away_team_name"
     t.integer  "home_team_goals"
     t.integer  "away_team_goals"
+    t.string   "home_team_icon"
+    t.string   "away_team_icon"
   end
+
+  create_table "games_teams", id: false, force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "game_id"
+  end
+
+  add_index "games_teams", ["game_id"], name: "index_games_teams_on_game_id", using: :btree
+  add_index "games_teams", ["team_id"], name: "index_games_teams_on_team_id", using: :btree
 
   create_table "pub_games", force: :cascade do |t|
     t.integer  "pub_id"

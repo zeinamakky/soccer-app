@@ -14,6 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Styles -->
+    <link href="css/styles/ecommerce.css" rel="stylesheet">
+
     <%= favicon_link_tag 'soccerball-icon.ico' %>
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -113,18 +115,19 @@
                       <% if current_user_login.user == nil %>
                        <li><a href="/users/new">Create your profile</a></li>
                       <% else %>
-                       <li><%= link_to "View your profile", "/users/#{current_user_login.id}" %></li>
+                       <li><%= link_to "View your profile", "/users/#{current_user_login.user.id}" %></li>
                        
-                       <li><%= link_to "Edit your profile", "/users/#{current_user_login.id}/edit" %></li>
+                       <li><%= link_to "Edit your profile", "/users/#{current_user_login.user.id}/edit" %></li>
                       <% end %> 
                     </ul>
                   </li>
                   <%end%>
                   
+                  <li><a href="/teams">Teams</a></li>
 
-                  <li><a href="/pubs">All Pubs</a></li>
+                  <li><a href="/pubs">Pubs</a></li>
                   
-                  <li><a href="/games">All Games</a></li>
+                  <li><a href="/games">Games</a></li>
 
                 </ul>
               </div>              
