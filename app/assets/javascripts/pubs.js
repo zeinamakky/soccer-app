@@ -15,6 +15,9 @@ function initMap() {
     //     });
       
       var places = [];
+      var markers =[];
+      var bounds = new google.maps.LatLngBounds();
+
       for (var i = 0; i < data.length; i++) {
         var placeAddress = data[i].address1 + ", " + data[i].city + ", " + data[i].state  + ", " + data[i].zip;
         var placeName = data[i].name;
@@ -41,9 +44,7 @@ function initMap() {
               map: map,
               position: results[0].geometry.location
             });
-            var contentString = '<h2>' + place.name + '</h2>' +
-        place.address ;
-      
+            var contentString = '<h2>' + place.name + '</h2>' + place.address ;
             marker.addListener('click', function() {
               infowindow.setContent(contentString);
               infowindow.open(map, marker);
@@ -51,6 +52,11 @@ function initMap() {
           } else {
             console.log("not working");
           }
+          markers.push(marker);
+          for (var i = 0;i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+          }
+          map.fitBounds(bounds);
 
         });
       });
