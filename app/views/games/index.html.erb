@@ -57,7 +57,7 @@
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToUserGame(pub_id, match.id, <%= current_user_login.id %>)">Add game to your profile</button>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%= current_user_login.user.id %>)">Add game to your profile</button>
                   </form>
                 <% end %>
                   <hr>
@@ -107,7 +107,7 @@
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToUserGame(pub_id, match.id, <%= current_user_login.id %>)">Add game to your profile</button>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%= current_user_login.user.id %>)" class="btn btn-color">Add game to your profile</button>
                   </form>
                 <% end %>
                 <hr>
@@ -152,7 +152,7 @@
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.user.id%>)">Add game to your profile</button>
                   </form>
                 <% end %>
                   <hr>
@@ -202,7 +202,7 @@
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.user.id%>)">Add game to your profile</button>
                   </form>
                 <% end %>
                   <hr>
@@ -252,7 +252,7 @@
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.user.id%>)">Add game to your profile</button>
                   </form>
                 <% end %>
                 <hr>
@@ -298,7 +298,7 @@
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in match.pubs" value="{{ pub.id }}" required>{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.id%>)">Add game to your profile</button>
+                    <button ng-click="addGameToUserGame(pub_id, match.id, <%=current_user_login.user.id%>)">Add game to your profile</button>
                   </form>
                 <% end %>
                   <hr>

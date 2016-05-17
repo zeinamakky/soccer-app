@@ -3,11 +3,10 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    
   end
+
   def new
     @user = User.new
-    
   end
 
   def create
@@ -20,6 +19,7 @@ class UsersController < ApplicationController
       email: current_user_login.email,
       user_login_id: current_user_login.id
     )
+
     # @user_photo = UserPhoto.new(user_photo_params)
 
     # respond_to do |format|
@@ -32,20 +32,30 @@ class UsersController < ApplicationController
     #   end
     # end
     @user.save
+
+    user_photo = UserPhoto.new(
+      file: params[:file],
+      user_id: @user.id
+    )
+    user_photo.save
+
     redirect_to "/users/#{@user.id}"
   end
 
   def show
     @user = User.find_by(id: params[:id])
+    @user_allegiances = UserAllegiance.where(user_id: params[:id])
     @user_games = UserGame.where(user_id: current_user_login.id)
       def two_hours_later
         + 20*60*60
       end
+    @games = Game.where('date >= ?', 10.days.ago).where('date < ?', 10.days.from_now)
     render 'show.html.erb'
   end
 
   def edit
     @user = User.find_by(id: params[:id])
+    @user_photo = UserPhoto.find_by(id: @user.user_photo_id)
   end
 
   def update
@@ -60,7 +70,12 @@ class UsersController < ApplicationController
       user_login_id: current_user_login.id,
       email: current_user_login.email
     )
-    
+
+    user_photo = UserPhoto.new(
+      file: params[:file],
+      user_id: @current_user_login.user.id
+    )
+    user_photo.save
     redirect_to "/users/#{params[:id]}"
   end
 

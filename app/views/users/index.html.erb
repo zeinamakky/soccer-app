@@ -1,52 +1,33 @@
-<div class="main-block">
-        
-        <!-- Page heading two starts -->
-        <!-- 
-        <div class="page-heading-two">
-          <div class="container">
-            <h2>Our Doctors <span>Something goes here</span></h2>
-            <div class="breads">
-              Home / <a href="#">Page</a> / <a href="#">Sub Page</a>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-         -->
-        <!-- Page heading two ends -->
-      <h2>The fans</h2>
-        <div class="container">
-          
-          <!-- Actual content for Doctor members -->
-          <div class="medical">
-            <!-- Team #3 -->
-            <div class="team-three">
-              <div class="row">
-                <div class="col-md-3 col-sm-6">
-                  <!-- Team member -->
-                  <% @users.each do |user| %>
-                  <div class="team-member">
-                    <!-- Team member name, image, designation container -->
-                    <div class="team-container">
-                      <!-- Image -->
-                      <img class="img-responsive" src="<%= user.avatar %>" alt="" />
-                      <div class="team-details">
-                        <!-- Name -->
-                        <h4><%= user.first_name %> <%= user.last_name %></h4>
-                      </div>
-                    </div>
-                    <!-- Contact details -->
-                    <div class="brand-bg">
-                      <% if user.fb_username %><a href="http://facebook.com/<%= user.fb_username%>" target="_blank" class="facebook b-tooltip" title="Facebook"><i class="fa fa-facebook square-2 rounded-1"></i></a><%end%>
-                      <% if user.twitter_username %><a href="http://twitter.com/@<%= user.twitter_username%>" target="_blank" class="twitter b-tooltip" title="Twitter"><i class="fa fa-twitter square-2 rounded-1"></i></a><% end %>
-                    </div>
-                  </div>
-                </div>
-                <% end %>
-                
-          </div>
-                  
+<div class="block-heading-two">
+  <h3><span>The fans</span></h3>
+</div>  
+<!-- Our team starts -->
+            
+<div class="team-six">
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+    <% @users.each do |user| %>
+      <!-- Team Member -->
+      <div class="team-member">
+        <!-- Image -->
+        <img class="img-responsive" src="<%= user.avatar %>" alt="" />
+        <!-- Name -->
+        <h4><%= user.first_name %> <%= user.last_name %></h4>
+        <!-- Team Links -->
+        <div class="team-links">
+          <% user.teams.each do |team| %>
+            <%= image_tag team.icon, class: 'team-links' %></span>
+          <% end %>
         </div>
       </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<!-- Our team ends -->    
+   
       
       <!-- Main content ends -->
       
