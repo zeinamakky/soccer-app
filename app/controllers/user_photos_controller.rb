@@ -56,6 +56,7 @@ class UserPhotosController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @user_photo.destroy
+
     respond_to do |format|
       format.html { redirect_to user_photos_url }
       format.json { head :no_content }

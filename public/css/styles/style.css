@@ -5508,10 +5508,12 @@ body.boxed.img-5 {
 .team-six .team-member {
 	max-width: 280px;
 	margin: 20px auto;
+	min-height: 300px;
 	text-align: center;
 }
-.team-six img {
+img.team-six {
 	width: 100%;
+	min-height:200px;
 	max-width: 200px;
 	margin: 0 auto;
 	margin-bottom:10px;
@@ -5527,6 +5529,11 @@ body.boxed.img-5 {
 	line-height: 25px;
 	font-size: 16px;
 }
+.team-six .team-member:hover {
+	opacity:.5;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
 /* Team #7 */
 .team-seven .team-member {
 	max-width: 280px;
@@ -7420,4 +7427,9 @@ footer a:hover {
 	max-width:350px;
 	width:100%;
 	box-shadow:inset 0px 0px 5px rgba(0,0,0,0.1);
+}
+.team-links img {
+	max-height: 25px !important;
+	width:25px !important;
+	border-radius: 0px;
 }

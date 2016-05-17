@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   post '/reviews' => 'reviews#create'
 
+  delete '/user_photos/:id' => 'user_photos#photo_destroy' 
 
   namespace :api do 
     namespace :v1 do

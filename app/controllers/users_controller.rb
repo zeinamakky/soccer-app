@@ -20,17 +20,6 @@ class UsersController < ApplicationController
       user_login_id: current_user_login.id
     )
 
-    # @user_photo = UserPhoto.new(user_photo_params)
-
-    # respond_to do |format|
-    #   if @user_photo.save
-    #     format.html { redirect_to user_photos_path, notice: 'user_photo was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @user_photo }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @user_photo.errors, status: :unprocessable_entity }
-    #   end
-    # end
     @user.save
 
     user_photo = UserPhoto.new(
@@ -55,7 +44,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:id])
-    @user_photo = UserPhoto.find_by(id: @user.user_photo_id)
+    @user_photo = UserPhoto.find_by(user_id: @user.id)
   end
 
   def update
@@ -70,6 +59,7 @@ class UsersController < ApplicationController
       user_login_id: current_user_login.id,
       email: current_user_login.email
     )
+    # user_photo = UserPhoto.find_by(user_id: @user.id)
 
     user_photo = UserPhoto.new(
       file: params[:file],
@@ -79,7 +69,13 @@ class UsersController < ApplicationController
     redirect_to "/users/#{params[:id]}"
   end
 
+  def pic_destroy
+    @user = User.find_by(id: params[:id])
 
+    @user_photo = UserPhoto.find_by(user_id: @user.id)
+    @user_photo.destroy
+
+  end
   def destroy
     
     @user = User.find_by(id: params[:id])
