@@ -15,7 +15,7 @@
     
     <!-- Styles -->
     <link href="css/styles/ecommerce.css" rel="stylesheet">
-
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
     <%= favicon_link_tag 'soccerball-icon.ico' %>
     <!-- Bootstrap CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -53,33 +53,28 @@
     <div class="outer">
       
       <!-- Top bar starts -->
+      <div id="soccer-nav">
       <div class="top-bar">
-        wiuerowue
-      </div>
+        <div class="header-2">
       
-      <!-- Top bar ends -->
-      
-      <!-- Header two Starts -->
-      <div class="header-2">
-      
-        <!-- Container -->
+        
         <div class="container">
           <div class="row">
             <div class="col-md-3">
               <!-- Logo section -->
-              <div class="logo">
-                <h1><a href="/"><i class="fa fa-laptop"></i> Soccer Watch</a></h1>
+              <div class="logo" id="soccer-logo">
+                <h1 class="soccer-logo"><a class="main-nav-link" href="/"><i class="fa fa-futbol-o"></i> Soccer Watch</a></h1>
               </div>
             </div>
             <div class="col-md-9">
             
               <!-- Navigation starts.  -->
-              <div class="navy">      
+              <div class="navy" id="soccer-navy">      
                 <ul>
                 <!-- Main menu -->
                   <% if current_pub_user == nil && current_user_login == nil %>
 
-                    <li><a href="#">PUB OWNERS</a>
+                    <li><a class="main-nav-link" href="#">PUB OWNERS</a>
                       <ul>
                         <li><a href="/pub_users/sign_up">Sign up</a> </li>
                         <li><a href="/pub_users/sign_in">Sign in</a></li>
@@ -87,7 +82,7 @@
                     </li>
 
                   <% elsif current_pub_user %>
-                    <li><a href="#">PUB OWNERS</a>
+                    <li><a class="main-nav-link" href="#">PUB OWNERS</a>
                       <ul>
                         <li>
                         <%= link_to "Sign out", "/pub_users/sign_out", method: :delete %>
@@ -101,14 +96,14 @@
                 
                   
                   <% if current_user_login == nil && current_pub_user == nil %>
-                  <li><a href="#">FANS</a>
+                  <li><a class="main-nav-link" href="#">FANS</a>
                     <ul>
                       <li><a href="/user_logins/sign_up">Sign up</a></li>
                       <li><a href="/user_logins/sign_in">Sign in</a></li>
                     </ul>
                   </li>
                   <% elsif current_user_login %>
-                  <li><a href="#">FANS</a>
+                  <li><a class="main-nav-link" href="#">FANS</a>
                     <ul>
                       <li><%= link_to "Sign out", "/user_logins/sign_out", method: :delete %></li>
                 
@@ -122,13 +117,13 @@
                     </ul>
                   </li>
                   <%end%>
-                  <li><a href="/users">All fans</a></li>
+                  <li><a class="main-nav-link" href="/users">All fans</a></li>
                   
-                  <li><a href="/teams">Teams</a></li>
+                  <li><a class="main-nav-link" href="/teams">Teams</a></li>
 
-                  <li><a href="/pubs">Pubs</a></li>
+                  <li><a class="main-nav-link" href="/pubs">Pubs</a></li>
                   
-                  <li><a href="/games">Games</a></li>
+                  <li><a class="main-nav-link" href="/games">Games</a></li>
 
                 </ul>
               </div>              
@@ -140,13 +135,19 @@
           
         </div>
         <div class="divider-6"></div>
+        </div>
       </div>
+      </div>
+      <!-- Top bar ends -->
+      
+      <!-- Header two Starts -->
+      
   
       <!-- Header two ends -->
       
       <!-- Main content starts -->
   
-      <div class="main-block">
+      <div id="maincontent" class="main-block">
         <div class="container">
         <script>
           window.fbAsyncInit = function() {
@@ -165,10 +166,10 @@
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
         </script>
-          <%= yield %>
+          
           <!-- Actual content -->
                   
-        </div>
+        </div><%= yield %>
       </div>
       
       <!-- Main content ends -->
