@@ -13,11 +13,12 @@
       <a href="/users/<%= user.id %>"><div class="team-member">
         <!-- Image -->
         <% if user.avatar != nil %>
-        <img class="img-responsive team-six" src="<%= user.avatar %>" alt="" />
+          <img class="img-responsive team-six" src="<%= user.avatar %>" alt="" />
         <% elsif user.user_photo %>
-        <img src="/user_photos/<%= user.user_photo.id %>" class="img-responsive team-six">
+          <!-- <img src="/user_photos/<%= user.user_photo.id %>" class="img-responsive team-six"> -->
+          <img src="/user_photos/<%= user.user_photo.id %>" class="img-responsive team-six">
         <% else %>
-        <%= image_tag 'noprofilepic.jpg', class: 'image-responsive team-six'%>
+          <%= image_tag 'noprofilepic.jpg', class: 'image-responsive team-six'%>
         <% end %>
         <!-- Name -->
         <h4><%= user.first_name %> <%= user.last_name %></h4>
@@ -28,9 +29,11 @@
           <% end %>
         </div>
         
-      </div></a>
+      </div>
+      </a>
       
-    </div><% end %>
+    </div>
+    <% end %>
 
   </div>
 </div>

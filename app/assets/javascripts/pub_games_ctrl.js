@@ -6,6 +6,7 @@
         $scope.pubGames = response.data;
         console.log(response.data);
       });
+      
     };
     
   });

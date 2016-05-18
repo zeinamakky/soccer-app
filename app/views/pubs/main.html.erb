@@ -17,19 +17,7 @@
   <%= submit_tag "Submit", class: "btn btn-default" %>
 <% end %>
 
-  <%= form_tag "/pub_games", class:"navbar-form", method: :get do %>
-  Search by day: 
- <%= date_field_tag :search_date, 'datepicker', class: "form-control" %>
   
-  <%= submit_tag "Submit", class: "btn btn-default" %>
-<% end %>
-
-  <%= form_tag "/games", class:"navbar-form", method: :get do %>
-  Search by day: 
- <%= date_field_tag :search_date, 'datepicker', class: "form-control" %>
-  
-  <%= submit_tag "Submit", class: "btn btn-default" %>
-<% end %>
 <div class="clearfix"></div>
 
 </div>

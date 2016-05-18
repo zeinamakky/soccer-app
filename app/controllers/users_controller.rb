@@ -48,9 +48,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User
-    .find_by(id: params[:id])
-    .update(
+    @user = User.find_by(id: params[:id])
+    @user.update(
       first_name: params[:first_name],
       last_name: params[:last_name],
       twitter_username: params[:twitter_username],
@@ -61,11 +60,16 @@ class UsersController < ApplicationController
     )
     # user_photo = UserPhoto.find_by(user_id: @user.id)
 
+    user_photo = UserPhoto.where(user_id: @user.id)
+    if user_photo
+      user_photo.destroy_all
+    end
     user_photo = UserPhoto.new(
       file: params[:file],
       user_id: @current_user_login.user.id
     )
     user_photo.save
+
     redirect_to "/users/#{params[:id]}"
   end
 

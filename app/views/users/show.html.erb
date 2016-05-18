@@ -23,12 +23,12 @@
       <div class="vcard-img">
         <% if @user.avatar != "" %>
           <img src="<%= @user.avatar %>" alt="" class="img-responsive img-thumbnail" />
-        <% else %>
+        <% elsif @user.user_photo %>
           <img src="/user_photos/<%= @user.user_photo.id %>" class="img-responsive img-thumbnail">
+        <% else %>
+          <%= image_tag 'noprofilepic.jpg', class: 'image-responsive img-thumbnail'%>
         <% end %>
-        <% if current_user_login.id == @user.user_login_id %>
-          <a href="/user_photos/<%= @user.user_photo.id %>/edit">Update photo</a>
-        <% end %>
+        
 
       </div>
       <div class="vcard-content">

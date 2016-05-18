@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'mailboxer'
 gem 'unirest', '~> 1.1.2'
 gem 'omniauth-facebook', '~> 3.0.0'
 gem 'bootstrap-datepicker-rails'

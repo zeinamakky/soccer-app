@@ -42,30 +42,15 @@
       <span class="fa fa-chevron-right"></span>
     </a>
   </div>
-<% elsif @photos[0].photo_url != nil %>
+<% else %>
   <div class="carousel-inner">
     <!-- Item, First item should have extra class "active" -->
     <div class="item active">
       <!-- Image -->
       <img src="<%= @photos[0].photo_url %>" alt="">
     </div>
+    
   </div>
-<% elsif @photos[0].filename != nil %>
-  <div class="carousel-inner">
-    <!-- Item, First item should have extra class "active" -->
-    <div class="item active">
-      <!-- Image -->
-      <img src="/pub_photos/<%= @photos[0].id %>" alt="">
-
-    </div>
-  </div>
-<% else %>
-  <div class="carousel-inner">
-    <!-- Item, First item should have extra class "active" -->
-    <div class="item active">
-      <!-- Image -->
-      <%= image_tag('genericpub.jpg') %>
-    </div>
 <% end %>
 
 <!-- Carousel without captions ends -->
@@ -78,28 +63,20 @@
 <div class="row">
   <div class="col-md-5 col-sm-5">
     <p class="para-big">
-      <%= @pub.description %>
-    </p>
       <%= @pub.address1 %>
-    <br /><%= @pub.city %>, <%= @pub.state %> <%= @pub.zip %>
-    <br /><%= @pub.phone %> 
-    <br /><a href="mailto:<%= @pub.email %>" target="_top"><%= @pub.email %></a>
-    <br /><a href="<%= @pub.website %>" target="_blank"><%= @pub.website %></a>
-    <br />
-    <% if current_pub_user && current_pub_user.id == @pub.pub_user_id %>
-      <%= link_to "Edit this pub", "/pubs/#{@pub.id}/edit" %>
-      <a href="/games">Add games</a>
-    <%end%>
+      <br /><%= @pub.city %>, <%= @pub.state %> <%= @pub.zip %></p>
+      <br /><%= @pub.phone %> 
+      <br /><a href="mailto:<%= @pub.email %>" target="_top"><%= @pub.email %></a>
+      <br /><a href="<%= @pub.website %>" target="_blank"><%= @pub.website %></a>
+      <br />
+      <% if current_pub_user && current_pub_user.id == @pub.pub_user_id %>
+        <%= link_to "Edit this pub", "/pubs/#{@pub.id}/edit" %>
+        <a href="/games">Add games</a>
+      <%end%>
 
   </div>
   <div class="col-md-5 col-sm-4 text-center">
-    <iframe
-    width="600"
-    height="250"
-    frameborder="0" style="border:0"
-    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNQdefi5T421OzoxswgyaFw458k-NUH70
-      &q=<%=@pub.address1%>,<%=@pub.city%>+<%=@pub.state%>" allowfullscreen>
-  </iframe>
+    <iframe src="<%= @pub.map %>" width="600" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
   </div>
 </div>
 

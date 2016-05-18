@@ -19,7 +19,13 @@
             <!-- Team #2 member -->
             <div class="team-member">
               <!-- Image -->
-              <img class="img-responsive" src="<%= pub.pub_photos[0].photo_url %>" alt="" />
+              <% if pub.pub_photos[0].photo_url != nil %>
+                <img class="img-responsive" src="<%= pub.pub_photos[0].photo_url %>" alt="" />
+              <% elsif pub.pub_photos[0].filename != nil %>
+                <img src="/pub_photos/<%= pub.pub_photos[0].id %>" alt="">
+              <% else %>
+                <%= image_tag('genericpub.jpg', class:'img-responsive') %>
+              <% end %>
               <div class="team-details">
       <!--           <span class="deg">Creative</span>
        -->          <!-- Name -->
@@ -29,17 +35,12 @@
                 <p><%= pub.city %>, <%= pub.state %> <%= pub.zip %></p>
                 <p><a href="<%= pub.website %>" target="_blank"><%= pub.website %></a></p>
                 <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
-                  <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %> |
+                  <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %> 
+                  <br />
                   <a href="/games">Add games</a>
                 <% end %>
 
-                <!-- Social -->
-                <!-- <div class="brand-bg">
-                  <a class="facebook" href="#"><i class="fa fa-facebook circle-3"></i></a>
-                  <a class="google-plus" href="#"><i class="fa fa-google-plus circle-3"></i></a>
-                  <a class="twitter" href="#"><i class="fa fa-twitter circle-3"></i></a>
-                  <a class="linkedin" href="#"><i class="fa fa-linkedin circle-3"></i></a>
-                </div> -->
+                
               </div>
               <div class="clearfix"></div>
             </div>

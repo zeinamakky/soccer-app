@@ -23,7 +23,7 @@ class PubsController < ApplicationController
     @reviews = Review.where(pub_id: params[:id])
     @pub = Pub.find_by(id: params[:id])
     @photos = PubPhoto.where(pub_id: params[:id])
-    @games = PubGame.where(pub_id: params[:id])
+    @games = PubGame.where(pub_id: params[:id]).order('date')
     render 'show.html.erb'
   end
 
@@ -34,6 +34,7 @@ class PubsController < ApplicationController
   def create
     @pub = Pub.new(
       name: params[:name],
+      description: params[:description],
       address1: params[:address1],
       address2: params[:address2],
       city: params[:city],
@@ -43,10 +44,15 @@ class PubsController < ApplicationController
       fax: params[:fax],
       email: params[:email],
       website: params[:website],
-      map: params[:map],
       pub_user_id: current_pub_user.id
     )
     @pub.save
+
+    pub_photo = PubPhoto.new(
+      file: params[:file],
+      pub_id: @pub.id
+    )
+    pub_photo.save
     redirect_to "/pubs/#{@pub.id}"
 
     # if @pub.save
@@ -66,6 +72,7 @@ class PubsController < ApplicationController
     @pub = Pub.find_by(id: params[:id])
     @pub.update(
       name: params[:name],
+      description: params[:description],
       address1: params[:address1],
       address2: params[:address2],
       city: params[:city],
@@ -74,9 +81,21 @@ class PubsController < ApplicationController
       phone: params[:phone],
       fax: params[:fax],
       email: params[:email],
-      map: params[:map],
       website: params[:website]
     )
+    pub_photo = PubPhoto.where(pub_id: @pub.id)
+    if pub_photo.length > 0
+      pub_photo.destroy_all
+    end
+    pub_photo = PubPhoto.new(
+      file: params[:file],
+      pub_id: @pub.id
+    )
+    puts "*" * 20
+    p pub_photo
+    p @pub.id
+    puts "*" * 20
+    pub_photo.save
     redirect_to "/pubs?owner=mypubs"
   end
 end

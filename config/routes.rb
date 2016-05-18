@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :user_logins
   devise_for :pub_users
 
+
   get '/' => 'pubs#main'
   get '/pubs' => 'pubs#index'
   get '/pubs/new' => 'pubs#new'
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   post '/reviews' => 'reviews#create'
 
   delete '/user_photos/:id' => 'user_photos#photo_destroy' 
+  get '/pub_photos/:id' => 'pub_photos#show' 
 
   namespace :api do 
     namespace :v1 do

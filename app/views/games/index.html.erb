@@ -40,9 +40,10 @@
                     {{ match.awayTeamName}}
                   </h2>
                   <p>{{match.date | date:"EEEE, MMMM d, y 'at' h:mma"}}</p>
-                  <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p>
+                  <!-- <p>Result: {{match.result["goalsHomeTeam"]}} - {{match.result["goalsAwayTeam"]}} </p> -->
                   <% if current_pub_user %>
                     <form>
+                      <input type="hidden" ng-model="date" ng-value="match.date"></input>
                       <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
                       <select ng-model="pub_id">
                         <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
