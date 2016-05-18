@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @user_allegiances = UserAllegiance.where(user_id: params[:id])
-    @user_games = UserGame.where(user_id: current_user_login.id)
+    @user_games = UserGame.where(user_id: params[:id])
       def two_hours_later
         + 20*60*60
       end

@@ -5400,13 +5400,14 @@ body.boxed.img-5 {
 .team-four .team-member {
 	max-width: 280px;
 	margin: 20px auto;
+	min-height: 280px;
 }
 .team-four .img-container { 
 	position: relative; 
 }
 .team-four .img-container .img-hover {
 	position: absolute;
-	top: 0;
+	top: 0px;
 	left: 0;
 	z-index: 5;
 	width: 100%;
@@ -5419,6 +5420,11 @@ body.boxed.img-5 {
 		 -ms-transition: all 0.3s ease;
 		  -o-transition: all 0.3s ease;
 			  transition: all 0.3s ease;
+}
+.team-four .img-container .img-hover-icons {
+	position: absolute;
+	top: -60px;
+	left: 60px;
 }
 .team-four .team-member:hover .img-container .img-hover {
 	opacity:1;
@@ -5435,6 +5441,7 @@ body.boxed.img-5 {
 	padding: 10px 10px;
 	text-align: center;
 	border:1px solid #eee;
+	min-height: 150px;
 	border-top:0px;
 	-webkit-transition: all 0.3s ease;
 	   -moz-transition: all 0.3s ease;

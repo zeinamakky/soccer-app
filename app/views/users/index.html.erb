@@ -15,7 +15,7 @@
         <% if user.avatar != nil %>
           <img class="img-responsive team-six" src="<%= user.avatar %>" alt="" />
         <% elsif user.user_photo %>
-          <!-- <img src="/user_photos/<%= user.user_photo.id %>" class="img-responsive team-six"> -->
+
           <img src="/user_photos/<%= user.user_photo.id %>" class="img-responsive team-six">
         <% else %>
           <%= image_tag 'noprofilepic.jpg', class: 'image-responsive team-six'%>

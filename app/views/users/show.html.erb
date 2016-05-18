@@ -6,7 +6,7 @@
   <header>
     <ul class="list-inline">
       <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-      <% if current_user_login.user.id == @user.id %>         
+      <% if current_user_login && current_user_login.user.id == @user.id %>         
         <li><a href="#teams" data-toggle="tab">My Teams</a></li>
         <li><a href="#games" data-toggle="tab">My Games</a></li>
         <li><a href="#messages" data-toggle="tab">Messages</a></li>
@@ -35,7 +35,7 @@
         <!-- Name -->
         <h2><%= @user.first_name %> <%= @user.last_name %></h2>
         <p><%= @user.description %></p>
-        <% if current_user_login.id == @user.user_login_id %>
+        <% if current_user_login && current_user_login.id == @user.user_login_id %>
         <p><%= link_to "Edit your profile", "/users/#{@user.id}/edit" %></p>
         <% end %>
         <!-- Social media links -->
@@ -78,7 +78,7 @@
     </div>
     
     <!-- Tab Pane - Portfolio -->
-    <% if current_user_login.user.id == @user.id %>         
+    <% if current_user_login && current_user_login.user.id == @user.id %>         
 
       <div class="tab-pane fade" id="games">
         <!-- Portfolio --> 

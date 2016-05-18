@@ -15,7 +15,10 @@
  *= require_tree .
  *= require_self
  */
-
+.pub-thumb {
+  max-height:105px;
+  overflow:hidden;
+}
 .team-icon {
   height:25px;
   margin-left:5px;

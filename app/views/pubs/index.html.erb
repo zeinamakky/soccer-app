@@ -8,48 +8,56 @@
       <div class="block-heading-two">
         <h3><span>All Pubs</span></h3>
       </div>
+<!-- Team #4 -->
+          <div class="team-four">
+            <div class="row">
+              <% @pubs.each do |pub| %>
 
-      <!-- Team #2 -->
-      <div class="team-two">
-        <div class="row">
-          <% @pubs.each do |pub| %>
+              <div class="col-md-3 col-sm-6">
+                <!-- Team member -->
 
-        
-          <div class="col-md-6">
-            <!-- Team #2 member -->
-            <div class="team-member">
-              <!-- Image -->
-              <% if pub.pub_photos[0].photo_url != nil %>
-                <img class="img-responsive" src="<%= pub.pub_photos[0].photo_url %>" alt="" />
-              <% elsif pub.pub_photos[0].filename != nil %>
-                <img src="/pub_photos/<%= pub.pub_photos[0].id %>" alt="">
-              <% else %>
-                <%= image_tag('genericpub.jpg', class:'img-responsive') %>
-              <% end %>
-              <div class="team-details">
-      <!--           <span class="deg">Creative</span>
-       -->          <!-- Name -->
-                <h4><%= link_to pub.name, "/pubs/#{pub.id}" %></h4>
-                <!-- Para -->
-                <p><%= pub.address1 %></p>
-                <p><%= pub.city %>, <%= pub.state %> <%= pub.zip %></p>
-                <p><a href="<%= pub.website %>" target="_blank"><%= pub.website %></a></p>
-                <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
-                  <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %> 
-                  <br />
-                  <a href="/games">Add games</a>
-                <% end %>
+                <div class="team-member">
+                  <!-- Image hover container -->
+                  <div class="img-container pub-thumb">
+                    <!-- Image -->
+                    <% if pub.pub_photos[0].photo_url != nil %>
+                      <img class="img-responsive" src="<%= pub.pub_photos[0].photo_url %>" alt="" />
+                    <% elsif pub.pub_photos[0].filename != nil %>
+                      <img src="/pub_photos/<%= pub.pub_photos[0].id %>" class="img-responsive" alt="">
+                    <% else %>
+                      <%= image_tag('genericpub.jpg', class:'img-responsive') %>
+                    <% end %>
 
-                
+                    <div class="img-hover">
+                      <!-- Social -->
+                      <div class="brand-bg img-hover-icons">
+                        <a class="facebook" href="<%= pub.website %>" target="_blank"><i class="fa fa-facebook circle-3"></i></a>
+                        <a class="google-plus" href="#"><i class="fa fa-globe circle-3"></i></a>
+                        <a class="twitter" href="#"><i class="fa fa-envelope circle-3"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="team-details">
+                    <!-- Name -->
+                    <h4><%= link_to pub.name, "/pubs/#{pub.id}" %></h4>
+                    <span class="deg"><%= pub.city %></span>
+                    <!-- Para -->
+                    <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
+                      <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %>  / 
+                      <a href="/games">Add games</a>
+                    <% end %>
+
+
+
+                  </div>
+                </div>
+              
               </div>
-              <div class="clearfix"></div>
+              <% end %>
             </div>
           </div>
-          <% end %>
-          
-        </div>
-      </div>
-      <!-- Team #2 end -->
+          <!-- Team #4 end -->
+      
     </div>
   </div>
 
