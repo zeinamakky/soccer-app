@@ -7,7 +7,12 @@
       
       <div class="page-heading-two">
         <div class="container">
-          <h2>Teams <span>Something goes here</span></h2>
+          <h2>Teams <i class="fa fa-futbol-o"></i> <span>
+          Filter by league: <input ng-model="leagueFilter"> 
+      
+      <datalist id="teams">
+        <option ng-repeat="team in teams">{{team.league}}</option>
+      </datalist></span></h2>
           <div class="clearfix"></div>
         </div>
       </div>
@@ -15,11 +20,7 @@
       <!-- Page heading two ends -->
     
       <div class="container">
-      <h5>Filter by league: <input ng-model="leagueFilter"> </h5>
       
-      <datalist id="teams">
-        <option ng-repeat="team in teams">{{team.league}}</option>
-      </datalist>
 
         <div class="block-heading-two">
           <h3><span>Premier League</span></h3>

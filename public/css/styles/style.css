@@ -29,10 +29,14 @@ h6 {
 h1 {
 	font-size: 30px;
 	line-height: 45px;
+	font-family: 'Abel', sans-serif;
+
 }
 h2 {
 	font-size: 25px;
 	line-height: 40px;
+	font-family: 'Abel', sans-serif;
+
 }
 h3 {
 	font-size: 22px;
@@ -1773,6 +1777,12 @@ a.brown:focus {
 	-ms-transition: background 2s ease;
 	transition: background 2s ease;
 }
+.brand-bg a.soccer i {
+	background:#413345;
+}
+.brand-bg a.soccer i:hover {
+	background:#3FCBF2;
+}
 .brand-bg a.facebook i {
 	background: #3280e7;
 }
@@ -2522,7 +2532,7 @@ body.boxed.img-5 {
 }
 .header-2 .navy > ul > li > a {
 	padding: 20px 15px;
-	font-size: 13px;
+	font-size: 20px;
 	line-height:28px;
 	color: #666;
 	font-weight: 600;
@@ -2767,8 +2777,9 @@ body.boxed.img-5 {
 	font-weight:400;
 }
 .page-heading-two h2 span{
-	font-size:13px;
+	font-size:18px;
 	color:#888;
+	padding-left:10px;
 }
 @media (max-width:767px){
 	.page-heading-two h2{
@@ -2814,6 +2825,12 @@ body.boxed.img-5 {
 	padding:0px 10px 6px 0px;
 	margin-bottom:10px;
 	border-bottom:1px solid #eee;
+}
+.block-heading-two h3 a:hover {
+	color:#000;
+}
+.block-heading-two h3 a:link, a:visited {
+	color:#413345;
 }
 .block-heading-two h3 span{
 	padding-bottom:11px;

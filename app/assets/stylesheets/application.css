@@ -24,11 +24,19 @@
   background: #413345;
 }
 .soccer-logo {
-  font-family: 'Righteous', cursive;
+  font-family: 'Abel', sans-serif;
+}
+#soccer-logo a {
+  font-family: 'Abel', sans-serif;
+}
+#soccer-nav ul {
+  font-family: 'Abel', sans-serif;
+  font-size: 30 pt;
 
 }
 #soccer-logo a.main-nav-link:link{
   color:#fff;
+
 }
 #soccer-logo a.main-nav-link:hover{
   color:#fff;

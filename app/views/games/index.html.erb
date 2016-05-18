@@ -1,18 +1,33 @@
-<div class="container">
-  <h1>Upcoming Games</h1>
-  <div ng-app="app">
+<div ng-app="app">
     <div ng-controller="gamesCtrl" ng-init="setup()">
-      
-      <h5>Filter by team: <input ng-model="teamFilter"> Filter by date: <input ng-model="dateFilter" data-provide='datepicker'></h5>
-      
-      <datalist id="teams">
-        <option ng-repeat="match in matches">{{match.awayTeamName}}</option>
-        <option ng-repeat="match in matches">{{match.homeTeamName}}</option>
-      </datalist>
 
-      <datalist id="pubs">
-        <option ng-repeat="match in matches">{{match.pub}}</option>
-      </datalist>
+      <!-- Page heading two starts -->    
+      <div class="page-heading-two">
+        <div class="container">
+          <h2>Upcoming games <i class="fa fa-futbol-o"></i> 
+          <span>Filter by team: <input ng-model="teamFilter"></span>
+          <span> Filter by date: <input ng-model="dateFilter" data-provide='datepicker'></span>
+            
+            <datalist id="teams">
+              <option ng-repeat="match in matches">{{match.awayTeamName}}</option>
+              <option ng-repeat="match in matches">{{match.homeTeamName}}</option>
+            </datalist>
+
+            <datalist id="pubs">
+              <option ng-repeat="match in matches">{{match.pub}}</option>
+            </datalist>
+
+          </span>
+          </h2>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+            
+      <!-- Page heading two ends -->
+      <div class="container">
+        
+      
+      
       
       <!-- Accordion starts -->
       <hr />
@@ -170,11 +185,11 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title">
+            <h2 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
             Bundesliga
             </a>
-            </h4>
+            </h2>
           </div>
           <div id="collapseThree" class="panel-collapse collapse in">
             <div class="panel-body">
@@ -220,11 +235,11 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title">
+            <h2 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
             Serie A
             </a>
-            </h4>
+            </h2>
           </div>
           <div id="collapseFour" class="panel-collapse collapse in">
             <div class="panel-body">
@@ -271,9 +286,9 @@
         <!-- EREDIVISIE -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title">
+            <h2 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Eredivisie</a>
-            </h4>
+            </h2>
           </div>
           <div id="collapseFive" class="panel-collapse collapse in">
             <div class="panel-body">

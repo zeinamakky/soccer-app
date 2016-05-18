@@ -1,6 +1,13 @@
-<div class="block-heading-two">
-  <h3><span>The fans</span></h3>
-</div>  
+ <!-- Page heading two starts -->    
+<div class="page-heading-two">
+  <div class="container">
+    <h2>Fans <i class="fa fa-futbol-o"></i> 
+    </h2>
+    <div class="clearfix"></div>
+  </div>
+</div>
+      
+<!-- Page heading two ends -->  
 <!-- Our team starts -->
             
 <div class="team-six">
@@ -21,7 +28,14 @@
           <%= image_tag 'noprofilepic.jpg', class: 'image-responsive team-six'%>
         <% end %>
         <!-- Name -->
-        <h4><%= user.first_name %> <%= user.last_name %></h4>
+        <div class="block-heading-two">
+          <h3><span><%= user.first_name %> <%= user.last_name %></span></h3>
+        </div>
+        <p><% if user.city %>
+            <%= user.city %>
+          <% end %>
+        </p>
+
         <!-- Team Links -->
         <div class="team-links">
           <% user.teams.each do |team| %>
