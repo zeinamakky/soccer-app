@@ -94,7 +94,9 @@
                     </ul>
                   </li><% end %>
                 
-                  
+                  <li><% if current_user_login %>
+              <%= link_to "Mailbox", conversations_path, class: "item" %>
+              <% end %></li>
                   <% if current_user_login == nil && current_pub_user == nil %>
                   <li><a class="main-nav-link" href="#">FANS</a>
                     <ul>

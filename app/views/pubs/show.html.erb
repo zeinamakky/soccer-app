@@ -112,7 +112,7 @@
 <div ng-app="app">
   <div ng-controller="gamesCtrl" ng-init="setup()">
     <% @games.each do |game| %>
-      <% if game.game.date >= 5.days.ago %>
+      <% if game.date >= 5.days.ago %>
         
         <div style="float:right;">
           <addtocalendar

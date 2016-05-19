@@ -34,6 +34,10 @@ Rails.application.routes.draw do
   delete '/user_photos/:id' => 'user_photos#photo_destroy' 
   get '/pub_photos/:id' => 'pub_photos#show' 
 
+  resources :conversations do
+    resources :messages
+  end
+
   namespace :api do 
     namespace :v1 do
       get '/pubs' => 'pubs#index'

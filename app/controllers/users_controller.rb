@@ -32,6 +32,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @users = User.all
     @user = User.find_by(id: params[:id])
     @user_allegiances = UserAllegiance.where(user_id: params[:id])
     @user_games = UserGame.where(user_id: params[:id])

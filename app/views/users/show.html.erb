@@ -9,7 +9,7 @@
       <% if current_user_login && current_user_login.user.id == @user.id %>         
         <li><a href="#teams" data-toggle="tab">My Teams</a></li>
         <li><a href="#games" data-toggle="tab">My Games</a></li>
-        <li><a href="#messages" data-toggle="tab">Messages</a></li>
+        <li><a href="/conversations">Mailbox</a></li>
       <%else%>
         <li><a href="#teams" data-toggle="tab">Teams</a></li>
       <% end %>
@@ -21,12 +21,13 @@
     <div class="tab-pane fade in active" id="home">
       <!-- Home Image -->
       <div class="vcard-img">
-        <% if @user.avatar != "" %>
+
+        <% if @user.avatar != nil %>
           <img src="<%= @user.avatar %>" alt="" class="img-responsive img-thumbnail" />
-        <% elsif @user.user_photo %>
-          <img src="/user_photos/<%= @user.user_photo.id %>" class="img-responsive img-thumbnail">
+        <% elsif @user.user_photo != nil %>
+          <img src="/user_photos/<%= @user.user_photo.id %>" class="img-responsive img-thumbnail" />
         <% else %>
-          <%= image_tag 'noprofilepic.jpg', class: 'image-responsive img-thumbnail'%>
+          <%= image_tag 'noprofilepic.jpg', class: 'img-responsive img-thumbnail'%>
         <% end %>
         
 
@@ -115,47 +116,8 @@
       </div>
     <% end %>
     <!-- Tab Pane -->
-    <div class="tab-pane fade" id="contact">
-      <!-- Contact Content -->
-      <div class="contact-content">
-        <div class="row">
-          <div class="col-md-6 col-sm-6">
-            <!-- Contact Form -->
-            <div class="contact-form">
-              <h4><i class="fa fa-envelope color"></i> Contact Form</h4>
-              <hr />
-              <form class="form" role="form">
-                <div class="form-group">
-                  <label class="sr-only" for="name">Your Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                  <label class="sr-only" for="mail">Email</label>
-                  <input type="email" class="form-control" id="mail" placeholder="Your Mail Id">
-                </div>
-                <div class="form-group">
-                  <label class="sr-only" for="comments">Comments</label>
-                  <textarea class="form-control" id="comments" rows="6" placeholder="Something..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-red">Submit</button>&nbsp;
-                <button type="submit" class="btn btn-white">Reset</button>
-              </form>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6">
-            <!-- Map -->
-            <div class="map">
-              <iframe src="https://maps.google.co.in/?ie=UTF8&amp;ll=12.956215,77.593517&amp;spn=0.10188,0.169086&amp;t=m&amp;z=13&amp;output=embed"></iframe>
-            </div>
-            <div class="contact-detail">
-              <p><i class="fa fa-building-o bg-red"></i>89 A, Bharathi Nagar,  Bangalore-89</P>
-              <p><i class="fa fa-envelope bg-green"></i>info@uksolution.com</p>
-              <p><i class="fa fa-phone bg-lblue"></i>+ (323) 839 8203</P>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </div>
+    
+
   </div>
 </div>
 

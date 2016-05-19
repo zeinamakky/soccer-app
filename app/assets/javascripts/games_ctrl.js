@@ -30,21 +30,29 @@
         $scope.teams = response.data;
 
       });
+      $http.get('/api/v1/teams.json').then(function(response) {
+        $scope.teams = response.data;
+
+      });
 
     };
     
 
-    $scope.addGameToPubGame = function(pub_id, game_id) {
+    $scope.addGameToPubGame = function(pub_id, game_id, date) {
+
       var duplicate = $scope.pubGames.filter(function(pubGame) {
         return pubGame.game_id === parseInt(game_id) && pubGame.pub_id === parseInt(pub_id);
       });
       console.log(duplicate);
-      
+
       if (duplicate.length === 0) {
         var params = {
           pub_id: pub_id,
-          game_id: game_id
+          game_id: game_id,
+          date: date
         };
+        console.log(params);
+
         $http.post('/api/v1/pub_games.json', params).then(function(response) {
           var notification = alertify.notify('Game added', 'success', 1, function(){  console.log('dismissed'); });
         
@@ -57,6 +65,7 @@
     };
 
     $scope.addGameToUserGame = function(pub_id, game_id, user_id) {
+
       var duplicates = $scope.userGames.filter(function(userGame) {
         return userGame.game_id === parseInt(game_id) && userGame.pub_id === parseInt(pub_id) && userGame.user_id === parseInt(user_id);
       });
