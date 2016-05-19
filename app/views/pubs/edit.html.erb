@@ -1,77 +1,75 @@
-<h1>Edit your pub</h1>
-<% if current_pub_user %>
-<%= form_tag "/pubs/#{@pub.id}", class: "form-horizontal",:multipart => true, method: :patch do %>
-  <div class="form-group">
-    <%=label_tag :name, "Pub name", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :name, @pub.name, class: "col-sm-10" %>
-  </div>
-  <div class="form-group">
-    <%=label_tag :description, "Pub description", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :description, @pub.description, class: "col-sm-10" %>
-  </div>
+<div class="container">
+  <h1>Edit your pub</h1>
+  <div class="soccer-form">
 
-  <div class="form-group">
-    <%=label_tag :address1, "Address", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :address1, @pub.address1, class: "col-sm-10" %>
-  </div>
-  
-  <div class="form-group">
-    <%=label_tag :address2, "Address", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :address2, @pub.address2, class: "col-sm-10" %>
-  </div>
-
-  <div class="form-group">
-    <%=label_tag :city, "City", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :city, @pub.city, class: "col-sm-10" %>
-  </div>
-
-  <div class="form-group">
-    <%=label_tag :zip, "Zip Code", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :zip, @pub.zip, class: "col-sm-10" %>
-  </div>
-
-  <div class="form-group">
-    <%=label_tag :state, "State", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :state, @pub.state, class: "col-sm-10" %>
-  </div>
-  
-
-  <div class="form-group">
-    <%=label_tag :phone, "Phone", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :phone, @pub.phone, class: "col-sm-10" %>
-  </div>
-  
-  <div class="form-group">
-    <%=label_tag :fax, "Fax", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :fax, @pub.fax, class: "col-sm-10" %>
-  </div>
-    
-  
-  <div class="form-group">
-    <%=label_tag :email, "Email", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :email, @pub.email, class: "col-sm-10" %>
-  </div>
-  
-  <div class="form-group">
-    <%=label_tag :website, "Website", class: "col-sm-2 control-label" %>
-    <%= text_field_tag :website, @pub.website, class: "col-sm-10" %>
-  </div>
-
+  <% if current_pub_user %>
+  <%= form_tag "/pubs/#{@pub.id}", class: "form-horizontal",:multipart => true, method: :patch do %>
+    <div class="form-group">
+      <%=label_tag :name, "Pub name" %>
+      <%= text_field_tag :name, @pub.name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%=label_tag :description, "Pub description" %>
+      <%= text_area_tag :description, @pub.description, class: "form-control" %>
+    </div>
 
     <div class="form-group">
-      <%= label_tag :file, "Upload a photo", class: "col-sm-2 control-label" %> 
-      <%= file_field_tag :file %>
+      <%=label_tag :address1, "Address" %>
+      <%= text_field_tag :address1, @pub.address1, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%=label_tag :address2, "Address" %>
+      <%= text_field_tag :address2, @pub.address2, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag :city, "City" %>
+      <%= text_field_tag :city, @pub.city, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag :zip, "Zip Code" %>
+      <%= text_field_tag :zip, @pub.zip, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag :state, "State" %>
+      <%= text_field_tag :state, @pub.state, class: "form-control" %>
+    </div>
+    
+
+    <div class="form-group">
+      <%=label_tag :phone, "Phone" %>
+      <%= text_field_tag :phone, @pub.phone, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%=label_tag :fax, "Fax" %>
+      <%= text_field_tag :fax, @pub.fax, class: "form-control" %>
+    </div>
+      
+    
+    <div class="form-group">
+      <%=label_tag :email, "Email" %>
+      <%= text_field_tag :email, @pub.email, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%=label_tag :website, "Website" %>
+      <%= text_field_tag :website, @pub.website, class: "form-control" %>
     </div>
 
 
-  
-  
-
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= submit_tag "Submit" %>
+    <div class="form-group">
+      <%= label_tag :file, "Upload a photo" %> 
+      <%= file_field_tag :file %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag "Submit", class:"btn btn-color" %>
     </div> 
+    <% end %>
   <% end %>
-<% end %>
-  
-
+</div>  
+</div>
 

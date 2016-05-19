@@ -34,6 +34,11 @@
   font-size: 30 pt;
 
 }
+#soccer-navy a.sub-nav-link:link {
+  font-size: 15px;
+
+}
+
 #soccer-logo a.main-nav-link:link{
   color:#fff;
 
@@ -76,3 +81,7 @@
     font-size: 12px;
     color: #dd2c00;
     margin: 10px 0 0 25px; }
+
+.soccer-form {
+  width:450px;
+}

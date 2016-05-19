@@ -76,8 +76,8 @@
 
                     <li><a class="main-nav-link" href="#">PUB OWNERS</a>
                       <ul>
-                        <li><a href="/pub_users/sign_up">Sign up</a> </li>
-                        <li><a href="/pub_users/sign_in">Sign in</a></li>
+                        <li><a class="sub-nav-link" href="/pub_users/sign_up">Sign up</a> </li>
+                        <li><a class="sub-nav-link" href="/pub_users/sign_in">Sign in</a></li>
                       </ul>
                     </li>
 
@@ -85,11 +85,11 @@
                     <li><a class="main-nav-link" href="#">PUB OWNERS</a>
                       <ul>
                         <li>
-                        <%= link_to "Sign out", "/pub_users/sign_out", method: :delete %>
+                        <%= link_to "Sign out", "/pub_users/sign_out", method: :delete, class:"sub-nav-link" %>
                         </li>
                       
-                        <li><a href="/pubs?owner=mypubs">Your pubs</a></li>                
-                        <li><a href="/pubs/new">Add a Pub</a></li>
+                        <li><a class="sub-nav-link" href="/pubs?owner=mypubs">Your pubs</a></li>                
+                        <li><a class="sub-nav-link" href="/pubs/new">Add a Pub</a></li>
                       
                     </ul>
                   </li><% end %>
@@ -98,21 +98,21 @@
                   <% if current_user_login == nil && current_pub_user == nil %>
                   <li><a class="main-nav-link" href="#">FANS</a>
                     <ul>
-                      <li><a href="/user_logins/sign_up">Sign up</a></li>
-                      <li><a href="/user_logins/sign_in">Sign in</a></li>
+                      <li><a class="sub-nav-link" href="/user_logins/sign_up">Sign up</a></li>
+                      <li><a class="sub-nav-link" href="/user_logins/sign_in">Sign in</a></li>
                     </ul>
                   </li>
                   <% elsif current_user_login %>
                   <li><a class="main-nav-link" href="#">FANS</a>
                     <ul>
-                      <li><%= link_to "Sign out", "/user_logins/sign_out", method: :delete %></li>
+                      <li><%= link_to "Sign out", "/user_logins/sign_out", method: :delete, class:"sub-nav-link" %></li>
                 
                       <% if current_user_login.user == nil %>
-                       <li><a href="/users/new">Create your profile</a></li>
+                       <li><a class="sub-nav-link" href="/users/new">Create your profile</a></li>
                       <% else %>
-                       <li><%= link_to "View your profile", "/users/#{current_user_login.user.id}" %></li>
+                       <li><%= link_to "View your profile", "/users/#{current_user_login.user.id}", class: "sub-nav-link" %></li>
                        
-                       <li><%= link_to "Edit your profile", "/users/#{current_user_login.user.id}/edit" %></li>
+                       <li><%= link_to "Edit your profile", "/users/#{current_user_login.user.id}/edit", class: "sub-nav-link" %></li>
                       <% end %> 
                     </ul>
                   </li>
