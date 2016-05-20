@@ -7,30 +7,35 @@
     <%= form_tag '/users', class: "form-horizontal", :multipart => true, method: :post do %>
       <div class="form-group">
         <%=label_tag :first_name, "First name" %>
-        <%= text_field_tag :first_name, @first_name, class: "form-control" %>
+        <%= text_field_tag :first_name, @user.first_name ,class: "form-control" %>
       </div>
 
       <div class="form-group">
         <%=label_tag :last_name, "Last Name" %>
-        <%= text_field_tag :last_name, @last_name, class: "form-control" %>
+        <%= text_field_tag :last_name, @user.last_name, class: "form-control" %>
         <%= hidden_field_tag :email, current_user_login.email %>
       </div>
       
       <div class="form-group">
+        <%=label_tag :city, "City" %>
+        <%= text_field_tag :city, @user.city, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
         <%=label_tag :description, "A few words about you" %>
-        <%= text_area_tag :description, @user.description, class: "form-control" %>
+        <%= text_area_tag :description, @user.description ,class: "form-control" %>
       </div>
       <div class="form-group">
         <%=label_tag :twitter_username, "Twitter username" %>
-        <%= text_field_tag :twitter_username, @twitter_username, class: "form-control" %>
+        <%= text_field_tag :twitter_username, @user.twitter_username ,class: "form-control" %>
       </div>
       <div class="form-group">
         <%=label_tag :fb_username, "Facebook" %>
-        <%= text_field_tag :fb_username, @fb_username, class: "form-control" %>
+        <%= text_field_tag :fb_username, @user.fb_username ,class: "form-control" %>
       </div>
       <div class="form-group">
         <%=label_tag :avatar, "Link to a photo" %>
-        <%= text_field_tag :avatar, @avatar, class: "form-control" %>
+        <%= text_field_tag :avatar, @user.avatar ,class: "form-control" %>
       </div>
       
 

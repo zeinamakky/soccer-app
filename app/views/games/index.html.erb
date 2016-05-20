@@ -111,10 +111,12 @@
                 <% if current_pub_user %>
                   <form>
                     <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                    <input type="hidden" ng-model="date" ng-value="match.date"></input>
+
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                    <button ng-click="addGameToPubGame(pub_id, match.id, match.date)">Add game</button>
                   </form>
                 <%end%>
                 <% if current_user_login %>
@@ -157,10 +159,12 @@
                   <% if current_pub_user %>
                     <form>
                       <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                      <input type="hidden" ng-model="date" ng-value="match.date"></input>
+
                       <select ng-model="pub_id">
                         <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
                       </select>
-                      <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                      <button ng-click="addGameToPubGame(pub_id, match.id, match.date)">Add game</button>
                     </form>
                   <%end%>
                   <% if current_user_login %>
@@ -207,10 +211,12 @@
                   <% if current_pub_user %>
                     <form>
                       <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                      <input type="hidden" ng-model="date" ng-value="match.date"></input>
+
                         <select ng-model="pub_id">
                           <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
                         </select>
-                      <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                      <button ng-click="addGameToPubGame(pub_id, match.id, match.date)">Add game</button>
                     </form>
                   <%end%>
                   <% if current_user_login %>
@@ -257,10 +263,12 @@
                 <% if current_pub_user %>
                   <form>
                     <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                      <input type="hidden" ng-model="date" ng-value="match.date"></input>
+
                     <select ng-model="pub_id">
                       <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
                     </select>
-                    <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                    <button ng-click="addGameToPubGame(pub_id, match.id, match.date)">Add game</button>
                   </form>
                 <%end%>
                 <% if current_user_login %>
@@ -302,10 +310,12 @@
                     <div ng-if='match.pubs.length > 0'>
                       <form>
                         <input type="hidden" ng-model="game_id" ng-value="match.id"></input>
+                        <input type="hidden" ng-model="date" ng-value="match.date"></input>
+
                           <select ng-model="pub_id">
                           <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
                         </select>
-                        <button ng-click="addGameToPubGame(pub_id, match.id)">Add game</button>
+                        <button ng-click="addGameToPubGame(pub_id, match.id, match.date)">Add game</button>
                       </form>
                     </div>
                   <%end%>

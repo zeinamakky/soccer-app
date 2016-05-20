@@ -7,5 +7,7 @@ class Api::V1::PubsController < ApplicationController
     end
     render 'index.json.jbuilder'
   end
+
+  
   
 end

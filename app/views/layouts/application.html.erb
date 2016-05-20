@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Styles -->
-    <link href="css/styles/ecommerce.css" rel="stylesheet">
+    <link href="/css/styles/ecommerce.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
     <%= favicon_link_tag 'soccerball-icon.ico' %>
     <!-- Bootstrap CSS -->
@@ -94,9 +94,7 @@
                     </ul>
                   </li><% end %>
                 
-                  <li><% if current_user_login %>
-              <%= link_to "Mailbox", conversations_path, class: "item" %>
-              <% end %></li>
+                  
                   <% if current_user_login == nil && current_pub_user == nil %>
                   <li><a class="main-nav-link" href="#">FANS</a>
                     <ul>
@@ -119,14 +117,16 @@
                     </ul>
                   </li>
                   <%end%>
-                  <li><a class="main-nav-link" href="/users">All fans</a></li>
-                  
-                  <li><a class="main-nav-link" href="/teams">Teams</a></li>
 
                   <li><a class="main-nav-link" href="/pubs">Pubs</a></li>
                   
                   <li><a class="main-nav-link" href="/games">Games</a></li>
 
+                  <li><a class="main-nav-link" href="/users">Community</a></li>
+                  
+                  <li><a class="main-nav-link" href="/teams">Teams</a></li>
+
+                  
                 </ul>
               </div>              
               <!-- Navigation ends -->

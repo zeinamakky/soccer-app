@@ -22,9 +22,10 @@
       <!-- Home Image -->
       <div class="vcard-img">
 
-        <% if @user.avatar != nil %>
+        <% if @user.avatar != "" %>
           <img src="<%= @user.avatar %>" alt="" class="img-responsive img-thumbnail" />
-        <% elsif @user.user_photo != nil %>
+        
+        <% elsif @user.user_photo && @user.user_photo.filename != nil %>
           <img src="/user_photos/<%= @user.user_photo.id %>" class="img-responsive img-thumbnail" />
         <% else %>
           <%= image_tag 'noprofilepic.jpg', class: 'img-responsive img-thumbnail'%>
@@ -41,8 +42,8 @@
         <% end %>
         <!-- Social media links -->
         <div class="brand-bg">
-          <% if @user.fb_username %><a href="http://facebook.com/<%= @user.fb_username%>" target="_blank" class="facebook b-tooltip" title="Facebook"><i class="fa fa-facebook square-2 rounded-1"></i></a><%end%>
-          <% if @user.twitter_username %><a href="http://twitter.com/@<%= @user.twitter_username%>" target="_blank" class="twitter b-tooltip" title="Twitter"><i class="fa fa-twitter square-2 rounded-1"></i></a><% end %>
+          <% if @user.fb_username != "" %><a href="http://facebook.com/<%= @user.fb_username%>" target="_blank" class="facebook b-tooltip" title="Facebook"><i class="fa fa-facebook square-2 rounded-1"></i></a><%end%>
+          <% if @user.twitter_username != "" %><a href="http://twitter.com/@<%= @user.twitter_username%>" target="_blank" class="twitter b-tooltip" title="Twitter"><i class="fa fa-twitter square-2 rounded-1"></i></a><% end %>
         </div>
         <hr />
         
@@ -54,7 +55,7 @@
     <!-- Tab Pane - Education & Experience -->
     <div class="tab-pane fade" id="teams">
       <div class="education">
-        <h4></i>Teams</h4>
+        <h4></i>Teams | <a href="/teams">Add team</a></h4>
         <hr />
         <div class="row">
           <div class="col-md-12 col-sm-12">
@@ -62,13 +63,18 @@
               <% @user_allegiances.each do |user_allegiance| %>
                 <h4><%= image_tag user_allegiance.team.icon, class:'team-icon'%> <%= user_allegiance.team.name %></h4>
                 <h5>Upcoming <%= user_allegiance.team.name %> game:</h5>
-                <br />
-                <% @games.where(home_team_name: user_allegiance.team.name || away_team_name).each do |game| %>
+                <% @games.where(home_team_name: user_allegiance.team.name).each do |game| %>
                   <p><b><%= game.home_team_name %> vs <%= game.away_team_name %></b></p>
                   <p><%= game.date.strftime("%A, %d %b %Y %l:%M %p") %>
                   <br />
                   <br />
                 <% end %> 
+                <% @games.where(away_team_name: user_allegiance.team.name).each do |game| %>
+                  <p><b><%= game.home_team_name %> vs <%= game.away_team_name %></b></p>
+                  <p><%= game.date.strftime("%A, %d %b %Y %l:%M %p") %>
+                  <br />
+                  <br />
+                <% end %>
                 <hr>
               <%end%>
 
@@ -97,8 +103,8 @@
               
                   <addtocalendar
 
-                  start-date="<%= user_game.game.date.strftime("%Y%m%dT%H%M%S") %>"
-                  end-date="<%= (user_game.game.date + 2*60*60).strftime('%Y%m%dT%H%M%S')%>"
+                  start-date="<%= user_game.game.date.in_time_zone("Central Time (US & Canada)").strftime("%Y%m%dT%H%M%S") %>"
+                  end-date="<%= (user_game.game.date.in_time_zone("Central Time (US & Canada)") + 2*60*60).strftime('%Y%m%dT%H%M%S')%>"
                   title="<%= user_game.game.home_team_name %> vs <%= user_game.game.away_team_name %>"
                   location="<%= user_game.pub.name %>"
                   class-name="btn btn-sm btn-default dropdown-toggle"

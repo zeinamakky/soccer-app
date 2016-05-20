@@ -37,13 +37,12 @@
 </div> -->
 
 <% @pub_games.each do |game| %>
-  <h3><%= image_tag(@team.find_by(name: game.home_team_name).icon, class: "team-icon") %>
+  <h3>
   <%= game.home_team_name %> vs <%= game.away_team_name %>
   
-  <%= image_tag(@team.find_by(name: game.away_team_name).icon, class: "team-icon") %>
   </h3>
 
-    <p><b>Date:</b> <%= game.date.strftime("%A, %d %b %Y") %> at <%= game.date.in_time_zone("Central Time (US & Canada)").strftime("%l:%M %p") %></p>
+    <p><b>Date:</b> <%= game.date.in_time_zone("Central Time (US & Canada)").strftime("%A, %d %b %Y %l:%M %p") %> at <%= game.date.in_time_zone("Central Time (US & Canada)").strftime("%l:%M %p") %></p>
     
     <h5>Showing at the following pubs:</h5>
     <% game.pubs.each do |pub|%>

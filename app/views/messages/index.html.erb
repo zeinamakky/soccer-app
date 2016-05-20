@@ -2,7 +2,7 @@
   <!-- Header -->
   <header>
     <ul class="list-inline">
-      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+      <li class="active"><a href="/users/<%= current_user_login.user.id%>">Back to profile</a></li>
     </ul>
   </header>
   <!-- tab Content -->
@@ -18,10 +18,10 @@
         <div class="ui segment">
           <% @messages.each do |message| %>
             <% if message.body %>
-              <% user = User.find(message.user_id) %>
+              <% user = UserLogin.find(message.user_id) %>
               <div class="item">
                 <div class="content">
-                  <div class="header"><strong><%= user.first_name %></strong> <%= message.message_time %></div>
+                  <div class="header"><strong>From: <%= user.user.first_name %></strong> <%= message.message_time %></div>
                   <div class="list">
                     <div class="item">
                       <i class="right triangle icon"></i>
@@ -35,7 +35,11 @@
         </div>
         
         <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
-          <h2>To this person</h2>
+          <% if @conversation.sender_id == current_user_login.id %>
+            <% recipient = UserLogin.find(@conversation.recipient_id) %>
+          <% end %>
+          <h2>To: <%= recipient.user.first_name %></h2>
+
           <div class="field">
             <%= f.text_area :body, class: "form-control" %>
           </div>

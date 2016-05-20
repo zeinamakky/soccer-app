@@ -10,10 +10,16 @@ class UsersController < ApplicationController
   end
 
   def create
+    # if params[:avatar] != nil
+    #   avatar: params[:avatar]
+    # else
+    #   params: nil
+    # end
     @user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
       twitter_username: params[:twitter_username],
+      description: params[:description],
       fb_username: params[:fb_username],
       avatar: params[:avatar],
       email: current_user_login.email,
@@ -21,13 +27,12 @@ class UsersController < ApplicationController
     )
 
     @user.save
-
-    user_photo = UserPhoto.new(
+    if user_photo = UserPhoto.new(
       file: params[:file],
       user_id: @user.id
     )
-    user_photo.save
-
+      user_photo.save
+    end
     redirect_to "/users/#{@user.id}"
   end
 
@@ -54,6 +59,7 @@ class UsersController < ApplicationController
       first_name: params[:first_name],
       last_name: params[:last_name],
       twitter_username: params[:twitter_username],
+      description: params[:description],
       fb_username: params[:fb_username],
       avatar: params[:avatar],
       user_login_id: current_user_login.id,
@@ -74,13 +80,13 @@ class UsersController < ApplicationController
     redirect_to "/users/#{params[:id]}"
   end
 
-  def pic_destroy
-    @user = User.find_by(id: params[:id])
+  # def pic_destroy
+  #   @user = User.find_by(id: params[:id])
 
-    @user_photo = UserPhoto.find_by(user_id: @user.id)
-    @user_photo.destroy
+  #   @user_photo = UserPhoto.find_by(user_id: @user.id)
+  #   @user_photo.destroy
 
-  end
+  # end
   def destroy
     
     @user = User.find_by(id: params[:id])

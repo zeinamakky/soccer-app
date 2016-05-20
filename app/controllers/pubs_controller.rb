@@ -6,12 +6,12 @@ class PubsController < ApplicationController
     owner_pubs = params[:owner]
     if current_pub_user && owner_pubs
     @pubs = Pub.where(pub_user_id: current_pub_user.id) 
-    end
-
+    end      
     search_for = params[:search].downcase if params[:search]
     if search_for
       @pubs = Pub.where("lower(name) LIKE ? OR lower(address1) LIKE ? OR lower(city) LIKE ?", "%#{search_for}%", "%#{search_for}%", "%#{search_for}%")
     end
+
     
   end
 

@@ -7,6 +7,7 @@ function initMap() {
 
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 11,
+        // center: {lat: currentPub.lat, lng: currentPub.lng}
         center: {lat: -34.397, lng: 150.644}
       });
       var geocoder = new google.maps.Geocoder();
@@ -19,11 +20,12 @@ function initMap() {
       var bounds = new google.maps.LatLngBounds();
 
       for (var i = 0; i < data.length; i++) {
+        var placeId = data[i].id;
         var placeAddress = data[i].address1 + ", " + data[i].city + ", " + data[i].state  + ", " + data[i].zip;
         var placeName = data[i].name;
         var placeContact = data[i].website + '|' + data[i].email + '|' + data[i].phone + '|' + data[i].fax;
         // var placeDescription = data[i].description;
-        places.push({address: placeAddress, name: placeName, contact: placeContact });
+        places.push({id: placeId, address: placeAddress, name: placeName, contact: placeContact });
       }
       console.log(places);
       console.log(places.length);
@@ -44,7 +46,7 @@ function initMap() {
               map: map,
               position: results[0].geometry.location
             });
-            var contentString = '<h2>' + place.name + '</h2>' + place.address ;
+            var contentString = '<h2><a href="/pubs/' + place.id + '">' + place.name + '</a></h2>' + place.address ;
             marker.addListener('click', function() {
               infowindow.setContent(contentString);
               infowindow.open(map, marker);
@@ -57,6 +59,8 @@ function initMap() {
             bounds.extend(markers[i].getPosition());
           }
           map.fitBounds(bounds);
+
+          
 
         });
       });

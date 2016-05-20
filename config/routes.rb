@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       get '/teams' => 'teams#index'
       get '/user_allegiances' => 'user_allegiances#index'
       post '/user_allegiances' => 'user_allegiances#create'
+      get '/coords' => 'coords#fetch_search_coords'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

@@ -55,7 +55,8 @@
 
         $http.post('/api/v1/pub_games.json', params).then(function(response) {
           var notification = alertify.notify('Game added', 'success', 1, function(){  console.log('dismissed'); });
-        
+          // console.log(response);
+          $scope.pubGames.push(response.data);
         });
       } else {
           var notification = alertify.notify('Game already added', 'error', 1, function(){  console.log('dismissed'); });
@@ -78,6 +79,9 @@
         console.log('addGameToUserGame', params);
         $http.post('/api/v1/user_games.json', params).then(function(response) {
           var notification = alertify.notify('Game added', 'success', 1, function(){  console.log('dismissed'); });
+          console.log(response);
+          $scope.userGames.push(response.data);
+
         });
       } else {
         var notification = alertify.notify('Game already added', 'error', 1, function(){  console.log('dismissed'); });

@@ -18,11 +18,11 @@
             <% @conversations.each do |conversation| %>
               <% if conversation.sender_id == current_user_login.id || conversation.recipient_id == current_user_login.id %>
                 <% if conversation.sender_id == current_user_login.id %>
-                  <% recipient = User.find(conversation.recipient_id) %>
+                  <% recipient = UserLogin.find(conversation.recipient_id) %>
                 <% else %>
-                  <% recipient = User.find(conversation.sender_id) %>
+                  <% recipient = UserLogin.find(conversation.sender_id) %>
                 <% end %>
-                <%= link_to recipient.first_name, conversation_messages_path(conversation)%>
+                <p>Conversation with: <%= link_to recipient.user.first_name, conversation_messages_path(conversation)%></p>
               <% end %>
             <% end %>
           </div>

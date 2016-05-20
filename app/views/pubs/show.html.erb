@@ -116,8 +116,8 @@
         
         <div style="float:right;">
           <addtocalendar
-            start-date="<%= game.game.date.strftime("%Y%m%dT%H%M%S") %>"
-            end-date="<%= (game.game.date + 2*60*60).strftime('%Y%m%dT%H%M%S')%>"
+            start-date="<%= game.game.date.in_time_zone("Central Time (US & Canada)").strftime("%Y%m%dT%H%M%S") %>"
+            end-date="<%= (game.game.date.in_time_zone("Central Time (US & Canada)") + 2*60*60).strftime('%Y%m%dT%H%M%S')%>"
             title="<%= game.game.home_team_name %> vs <%= game.game.away_team_name %>"
             location="<%= game.pub.name %>"
             class-name="btn btn-sm btn-default dropdown-toggle"
