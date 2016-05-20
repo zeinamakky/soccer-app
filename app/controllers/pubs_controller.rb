@@ -20,6 +20,7 @@ class PubsController < ApplicationController
   end
 
   def show
+    @users = UserLogin.all
     @reviews = Review.where(pub_id: params[:id])
     @pub = Pub.find_by(id: params[:id])
     @photos = PubPhoto.where(pub_id: params[:id])
@@ -84,8 +85,8 @@ class PubsController < ApplicationController
       website: params[:website]
     )
     pub_photo = PubPhoto.where(pub_id: @pub.id)
-    if pub_photo.length > 0
-      pub_photo.destroy_all
+    if pub_photo.length > 3
+      pub_photo[0].destroy
     end
     pub_photo = PubPhoto.new(
       file: params[:file],

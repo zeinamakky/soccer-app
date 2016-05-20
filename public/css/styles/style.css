@@ -2137,7 +2137,7 @@ body.boxed.img-5 {
 	background-size: cover;
 }
 .outer {
-	background: #D1F5C4;
+	background: #D5FCC7;
 }
 .outer .container {
 	width:100%;
@@ -2728,8 +2728,9 @@ body.boxed.img-5 {
 	text-align:center;
 	background:url("../../img/backgrounds/bigsoccerbg.jpg");
 	background-size:cover;
-	background-position:center center;
+	background-position:bottom;
 	padding:100px 10px;
+	height:500px;
 
 	background-attachment:fixed;
 	margin-bottom:30px;

@@ -16,13 +16,13 @@
         <div class="ui list">
           <div class="item">
             <% @conversations.each do |conversation| %>
-              <% if conversation.sender_id == current_user_login.id || conversation.recipient_id == current_user_login.id %>
-                <% if conversation.sender_id == current_user_login.id %>
-                  <% recipient = UserLogin.find(conversation.recipient_id) %>
+              <% if conversation.sender_id == current_user_login.user.id || conversation.recipient_id == current_user_login.user.id %>
+                <% if conversation.sender_id == current_user_login.user.id %>
+                  <% recipient = User.find(conversation.recipient_id) %>
                 <% else %>
-                  <% recipient = UserLogin.find(conversation.sender_id) %>
+                  <% recipient = User.find(conversation.sender_id) %>
                 <% end %>
-                <p>Conversation with: <%= link_to recipient.user.first_name, conversation_messages_path(conversation)%></p>
+                <p>Conversation with: <%= link_to recipient.first_name, conversation_messages_path(conversation)%></p>
               <% end %>
             <% end %>
           </div>
@@ -34,9 +34,9 @@
         <h3>All Users</h3>
         <div class="ui list">
           <% @users.each do |user| %>
-            <% if user.id != current_user_login.id %>
+            <% if user.id != current_user_login.user.id %>
             <div class="item">
-              <%= user.first_name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user_login.id, recipient_id: user.id), method: 'post'%>
+              <%= user.first_name %> <%= link_to 'Message me!', conversations_path(sender_id: current_user_login.user.id, recipient_id: user.id), method: 'post'%>
             </div>
             <% end %>
           <% end %>

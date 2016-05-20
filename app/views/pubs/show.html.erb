@@ -21,9 +21,12 @@
     <!-- Slides. You can also add captions -->
     <div class="carousel-inner">
       <!-- Item, First item should have extra class "active" -->
+
       <% @photos.each do |photo| %>
+      
         <div class="item active">
           <!-- Image -->
+
           <img src="<%= @photos[0].photo_url %>" alt="">
         </div>
       <% end %>
@@ -60,6 +63,7 @@
     </div>
   </div>
 <% else %>
+
   <div class="carousel-inner">
     <!-- Item, First item should have extra class "active" -->
     <div class="item active">
@@ -67,6 +71,7 @@
       <%= image_tag('genericpub.jpg') %>
     </div>
 <% end %>
+
 
 <!-- Carousel without captions ends -->
 
@@ -194,7 +199,22 @@
             
             <%= review.review_text%>
           </div>
-          <h5><a href="#"><%= review.author %><img src="<%= review.user.avatar %>" alt="" class="img-responsive img-circle" /></a></h5>        
+          <h5><a href="#"><%= review.author %>
+          <% photo = UserPhoto.find_by(user_id: review.user_id) %>
+          <% reviewer = UserLogin.find_by(id: review.user_id) %>
+          <% if reviewer.user.avatar != "" %>
+            <img src="<%= reviewer.user.avatar %>" alt="" class="img-responsive img-circle" /></a>
+          
+          
+          <% elsif photo && photo.filename != nil %>
+            <img src="/user_photos/<%= photo.id %>" alt="" class="img-responsive img-circle" /></a>
+
+          <% else %>
+            <%= image_tag('noprofilepic.jpg', class:"img-responsive img-circle") %></a>
+
+          <% end %>
+
+          </h5>        
           
         </div>
       </div> <!-- Carousel item ends -->

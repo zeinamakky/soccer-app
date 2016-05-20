@@ -22,7 +22,7 @@
         <% if user.avatar != "" %>
           <img class="img-responsive team-six" src="<%= user.avatar %>" alt="" />
         
-
+        
         <% elsif user.user_photo && user.user_photo.filename != nil %>
           <img src="/user_photos/<%= user.user_photo.id %>" class="img-responsive team-six">
         <% else %>
