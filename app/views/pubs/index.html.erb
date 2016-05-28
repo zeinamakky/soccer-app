@@ -52,6 +52,9 @@
                     </div>
                     <p><%= pub.address1 %></p>
                     <span class="deg"><%= pub.city %></span>
+                    <p><% pub.teams.each do |team| %>
+                    <%= image_tag(team.icon, class: 'team-icon') %>
+                    <% end %></p>
                     <!-- Para -->
                     <% if current_pub_user && current_pub_user.id == pub.pub_user_id %>
                       <%= link_to "Edit this pub", "/pubs/#{pub.id}/edit" %>  / 

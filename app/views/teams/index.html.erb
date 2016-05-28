@@ -51,6 +51,17 @@
                   </form>
                 <% end %>
                 </p>
+
+                <p><% if current_pub_user %>
+                  <form>
+                    <select ng-model="pub_id">
+                      <option ng-repeat="pub in pubs" value="{{ pub.id }}">{{pub.name}}</option>
+                    </select>
+                    <input type="hidden" ng-model="team_id" ng-value="team.id"></input>
+                    <button ng-click="addTeamToPubAllegiance(team.id, pub_id)" class="btn btn-color">Add team to your faves</button>
+                  </form>
+                <% end %>
+                </p>
                 <!-- Media icon -->
                 <!-- <span class="p-media pull-right">
                   <a href="#" class="b-tooltip" data-placement="top" title="21"><i class="fa fa-heart color"></i></a>&nbsp;

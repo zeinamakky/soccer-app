@@ -44,7 +44,7 @@
         return pubGame.game_id === parseInt(game_id) && pubGame.pub_id === parseInt(pub_id);
       });
       console.log(duplicate);
-
+      // console.log(game_id, pub_id);
       if (duplicate.length === 0) {
         var params = {
           pub_id: pub_id,

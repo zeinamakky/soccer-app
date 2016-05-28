@@ -11,7 +11,7 @@ class PubsController < ApplicationController
     if search_for
       @pubs = Pub.where("lower(name) LIKE ? OR lower(address1) LIKE ? OR lower(city) LIKE ?", "%#{search_for}%", "%#{search_for}%", "%#{search_for}%")
     end
-
+    @allegiances = Allegiance.all
     
   end
 

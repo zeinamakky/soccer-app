@@ -41,15 +41,24 @@ Rails.application.routes.draw do
   namespace :api do 
     namespace :v1 do
       get '/pubs' => 'pubs#index'
+
       get '/games' => 'games#index'
+
       get '/pub_games' => 'pub_games#index'
       post '/pub_games' => 'pub_games#create'
+
       get '/user_games' => 'user_games#index'
       post '/user_games' => 'user_games#create'
+
       get '/teams' => 'teams#index'
+
       get '/user_allegiances' => 'user_allegiances#index'
       post '/user_allegiances' => 'user_allegiances#create'
+
       get '/coords' => 'coords#fetch_search_coords'
+
+      get '/allegiances' => 'allegiances#index'
+      post '/allegiances' => 'allegiances#create'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
